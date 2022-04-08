@@ -1,4 +1,4 @@
-import { IBackpackItem, useStore } from '../store';
+import { useStore } from '../store';
 import { useApi } from './api-factory';
 
 export const useBackpackActions = (errorHandler?: (message: string) => void) => {

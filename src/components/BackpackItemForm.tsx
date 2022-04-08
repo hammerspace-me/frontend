@@ -1,7 +1,7 @@
-import { FC, useState } from 'react';
-import { Button, Col, Form, Table } from 'react-bootstrap';
+import { FC } from 'react';
+import { Button, Col, Form } from 'react-bootstrap';
 import { useApi } from '../actions/api-factory';
-import { useStore } from '../store';
+import { IBackpackItem, useStore } from '../store';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -12,10 +12,10 @@ type FormData = {
 };
 
 const BackpackItemForm: FC = () => {
-  const [store, setStore] = useStore();
-  let { id } = useParams<'id'>();
+  const [store] = useStore();
+  const { id } = useParams<'id'>();
 
-  const backpackItem = store.backpack?.backpackItems.find((item) => item.content == id);
+  const backpackItem = store.backpack?.backpackItems.find((item) => item.content === id);
 
   const {
     register,
@@ -32,10 +32,10 @@ const BackpackItemForm: FC = () => {
   const { api } = useApi(store.accessToken);
   const navigate = useNavigate();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: IBackpackItem) => {
     const mode = id == null ? 'create' : 'edit';
 
-    if (mode == 'create') {
+    if (mode === 'create') {
       await api.post('/backpack/item', data);
       navigate('/admin/backpack');
     } else {

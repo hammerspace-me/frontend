@@ -4,8 +4,8 @@ import { FC } from 'react';
 import { Link, LinkProps, useMatch, useResolvedPath } from 'react-router-dom';
 
 const ActiveLink: FC<LinkProps> = ({ children, to, ...props }: LinkProps) => {
-  let resolved = useResolvedPath(to);
-  let match = useMatch({ path: resolved.pathname, end: false });
+  const resolved = useResolvedPath(to);
+  const match = useMatch({ path: resolved.pathname, end: false });
 
   return (
     <Link to={to} className={match ? 'nav-link active' : 'nav-link'} {...props}>

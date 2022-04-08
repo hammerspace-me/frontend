@@ -1,5 +1,4 @@
-import axios, { AxiosInstance } from 'axios';
-import { useStore } from '../store';
+import axios, { AxiosError, AxiosInstance } from 'axios';
 
 export class Api {
   private api: AxiosInstance;
@@ -26,7 +25,7 @@ export class Api {
     this.unauthorizedHandler = onUnauthorized;
   }
 
-  private processError = (url: string, error: any) => {
+  private processError = (url: string, error: AxiosError) => {
     if (error.response) {
       /*
        * The request was made and the server responded with a
@@ -71,12 +70,14 @@ export class Api {
       const response = await this.api.get(url);
       return response.data;
     } catch (error) {
-      this.processError(url, error);
+      if (axios.isAxiosError(error)) {
+        this.processError(url, error);
+      }
       throw error;
     }
   };
 
-  public post = async (url: string, data: any, callBack?: Function) => {
+  public post = async (url: string, data: unknown, callBack?: () => void) => {
     try {
       const response = await this.api.post(url, data);
       if (callBack) {
@@ -84,34 +85,14 @@ export class Api {
       }
       return response.data;
     } catch (error) {
-      this.processError(url, error);
-      throw error;
-    }
-  };
-
-  public postForm = async (url: string, form: any, callBack?: Function) => {
-    try {
-      const formData = new FormData();
-
-      const keys = Object.keys(form);
-      keys.forEach((key) => {
-        formData.append(key, form[key]);
-      });
-
-      const headers = { 'Content-Type': 'multipart/form-data' };
-
-      await this.api.post(url, formData, { headers });
-
-      if (callBack) {
-        callBack();
+      if (axios.isAxiosError(error)) {
+        this.processError(url, error);
       }
-    } catch (error) {
-      this.processError(url, error);
       throw error;
     }
   };
 
-  public put = async (url: string, data: any, callBack?: Function) => {
+  public put = async (url: string, data: unknown, callBack?: () => void) => {
     try {
       const response = await this.api.put(url, data);
       if (callBack) {
@@ -119,12 +100,14 @@ export class Api {
       }
       return response;
     } catch (error) {
-      this.processError(url, error);
+      if (axios.isAxiosError(error)) {
+        this.processError(url, error);
+      }
       throw error;
     }
   };
 
-  public remove = async (url: string, callBack?: Function) => {
+  public remove = async (url: string, callBack?: () => void) => {
     try {
       const response = await this.api.delete(url);
       if (callBack) {
@@ -132,7 +115,9 @@ export class Api {
       }
       return response;
     } catch (error) {
-      this.processError(url, error);
+      if (axios.isAxiosError(error)) {
+        this.processError(url, error);
+      }
       throw error;
     }
   };

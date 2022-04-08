@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { ethers } from 'ethers';
 import { useApi } from '../actions/api-factory';
 import { Button, Row, Col } from 'react-bootstrap';
@@ -7,18 +7,18 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 const Login: FC = () => {
-  const [loading, setLoading] = useState(false); // Loading button state
   const [store, setStore] = useStore();
   const { api } = useApi();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleClick = async () => {
-    const _window = window as any;
+    /* eslint-disable */
+    const _window: any = window;
     if (!_window.ethereum) throw new Error('No crypto wallet found. Please install it.');
-
-    setLoading(true);
     await _window.ethereum.send('eth_requestAccounts');
     const provider = new ethers.providers.Web3Provider(_window.ethereum);
+    /* eslint-enable */
+
     const signer = provider.getSigner();
     const address = await signer.getAddress();
 
@@ -52,7 +52,6 @@ const Login: FC = () => {
       userAddress: address
     }));
 
-    setLoading(false);
     navigate('/admin', { replace: true });
   };
 

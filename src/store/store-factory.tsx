@@ -1,3 +1,5 @@
+/* Disabling eslint because any can not be solved completely in this case. Store should be refactored in the future to not use context API anymore. */
+/* eslint-disable */
 import {
   createContext,
   useContext,
@@ -8,7 +10,7 @@ import {
   SetStateAction
 } from 'react';
 
-const storeFactory = <T extends {}>() => {
+const storeFactory = <T extends Record<string, any>>() => {
   // Make a context for the store
   const context = createContext<any>(undefined);
 
@@ -37,3 +39,4 @@ const storeFactory = <T extends {}>() => {
 };
 
 export default storeFactory;
+/* eslint-enable */

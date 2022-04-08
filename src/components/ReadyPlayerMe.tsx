@@ -3,10 +3,11 @@ import { Button, Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '../actions/api-factory';
 import { useStore } from '../store';
+
 const ReadyPlayerMe: FC = () => {
   const [avatarUrl, setAvatarUrl] = useState<string>();
   const rpmIframe = useRef(null);
-  const [store, setStore] = useStore();
+  const [store] = useStore();
   const { api } = useApi(store.accessToken);
   const navigate = useNavigate();
 
@@ -39,7 +40,8 @@ const ReadyPlayerMe: FC = () => {
     });
   };
 
-  const receiveMessage = (message: MessageEvent<any>) => {
+  /* eslint-disable */
+  const receiveMessage = (message: MessageEvent<unknown>) => {
     const json = parse(message);
 
     if (json?.source !== 'readyplayerme') {
@@ -73,13 +75,14 @@ const ReadyPlayerMe: FC = () => {
       return null;
     }
   };
+  /* eslint-enable */
 
   useEffect(() => {
     window.addEventListener('message', receiveMessage, false);
     return () => {
       window.removeEventListener('message', receiveMessage);
     };
-  }, []);
+  }, [receiveMessage]);
 
   return (
     <>

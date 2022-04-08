@@ -1,18 +1,17 @@
 import { FC, useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useApi } from '../actions/api-factory';
 import { useBackpackActions } from '../actions/backpackActions';
 import { IBackpackItem, useStore } from '../store';
 
 const BackpackList: FC = () => {
-  const [store, setStore] = useStore();
+  const [store] = useStore();
   const navigate = useNavigate();
   const { getBackpack, deleteBackpackItem } = useBackpackActions();
 
   useEffect(() => {
     getBackpack();
-  }, []);
+  }, [getBackpack]);
 
   const onDelete = async (item: IBackpackItem) => {
     await deleteBackpackItem(item.content);

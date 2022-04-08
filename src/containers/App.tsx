@@ -19,8 +19,8 @@ import Logo from '../assets/logo.png';
 import LoginButton from '../components/LoginButton';
 
 const ActiveLink: FC<LinkProps> = ({ children, to, ...props }: LinkProps) => {
-  let resolved = useResolvedPath(to);
-  let match = useMatch({ path: resolved.pathname, end: false });
+  const resolved = useResolvedPath(to);
+  const match = useMatch({ path: resolved.pathname, end: false });
 
   return (
     <Link to={to} className={match ? 'nav-link active' : 'nav-link'} {...props}>
@@ -31,9 +31,9 @@ const ActiveLink: FC<LinkProps> = ({ children, to, ...props }: LinkProps) => {
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   const [store] = useStore();
-  let location = useLocation();
+  const location = useLocation();
 
-  if (store.accessToken == undefined) {
+  if (store.accessToken === undefined) {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them
     // along to that page after they login, which is a nicer user experience
@@ -52,7 +52,7 @@ const App: FC = () => {
           <header className="p-3">
             <div className="container">
               <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <img className="bi me-2" width="50" role="img" src={Logo} />
+                <img alt="Backpack logo" className="bi me-2" width="50" src={Logo} />
                 <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                   <li>
                     <ActiveLink to="/">Home</ActiveLink>
