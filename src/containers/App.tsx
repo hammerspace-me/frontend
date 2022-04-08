@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { Container } from "react-bootstrap";
+import { FC } from 'react';
+import { Container } from 'react-bootstrap';
 import {
   BrowserRouter,
   Link,
@@ -9,21 +9,21 @@ import {
   Routes,
   useLocation,
   useMatch,
-  useResolvedPath,
-} from "react-router-dom";
-import { useStore } from "../store";
-import { StoreProvider, storeDefault } from "../store";
-import Login from "./Login";
-import Admin from "./Admin";
-import Logo from "../assets/logo.png";
-import LoginButton from "../components/LoginButton";
+  useResolvedPath
+} from 'react-router-dom';
+import { useStore } from '../store';
+import { StoreProvider, storeDefault } from '../store';
+import Login from './Login';
+import Admin from './Admin';
+import Logo from '../assets/logo.png';
+import LoginButton from '../components/LoginButton';
 
 const ActiveLink: FC<LinkProps> = ({ children, to, ...props }: LinkProps) => {
   let resolved = useResolvedPath(to);
   let match = useMatch({ path: resolved.pathname, end: false });
 
   return (
-    <Link to={to} className={match ? "nav-link active" : "nav-link"} {...props}>
+    <Link to={to} className={match ? 'nav-link active' : 'nav-link'} {...props}>
       {children}
     </Link>
   );

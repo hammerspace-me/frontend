@@ -1,5 +1,5 @@
-import axios, { AxiosInstance } from "axios";
-import { useStore } from "../store";
+import axios, { AxiosInstance } from 'axios';
+import { useStore } from '../store';
 
 export class Api {
   private api: AxiosInstance;
@@ -13,13 +13,13 @@ export class Api {
     accessToken?: string
   ) {
     const headers = {
-      "Content-Type": "application/json",
-      Authorization: accessToken ? "Bearer " + accessToken : "",
+      'Content-Type': 'application/json',
+      Authorization: accessToken ? 'Bearer ' + accessToken : ''
     };
 
     this.api = axios.create({
       baseURL: baseUrl,
-      headers: headers,
+      headers: headers
     });
 
     this.errorHandler = onError;
@@ -32,9 +32,9 @@ export class Api {
        * The request was made and the server responded with a
        * status code that falls out of the range of 2xx
        */
-      console.log("err-data", error.response.data);
-      console.log("err-status", error.response.status);
-      console.log("err-headers", error.response.headers);
+      console.log('err-data', error.response.data);
+      console.log('err-status', error.response.status);
+      console.log('err-headers', error.response.headers);
 
       if (
         error.response.status === 401 ||
@@ -45,10 +45,8 @@ export class Api {
       } else {
         this.errorHandler(
           error.response.data && error.response.data.message
-            ? `${JSON.stringify(error.response.data.message)} (${
-                error.response.status
-              })`
-            : "An unexpected error occurred"
+            ? `${JSON.stringify(error.response.data.message)} (${error.response.status})`
+            : 'An unexpected error occurred'
         );
       }
     } else if (error.request) {
@@ -57,14 +55,14 @@ export class Api {
        * is an instance of XMLHttpRequest in the browser and an instance
        * of http.ClientRequest in Node.js
        */
-      console.log("Request error", error.request);
+      console.log('Request error', error.request);
 
-      this.errorHandler("API call failed");
+      this.errorHandler('API call failed');
     } else {
       // Something happened in setting up the request and triggered an Error
-      console.log("Error", error);
+      console.log('Error', error);
 
-      this.errorHandler("An unexpected error occurred");
+      this.errorHandler('An unexpected error occurred');
     }
   };
 
@@ -100,7 +98,7 @@ export class Api {
         formData.append(key, form[key]);
       });
 
-      const headers = { "Content-Type": "multipart/form-data" };
+      const headers = { 'Content-Type': 'multipart/form-data' };
 
       await this.api.post(url, formData, { headers });
 

@@ -1,8 +1,8 @@
-import { FC, useEffect, useRef, useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { useApi } from "../actions/api-factory";
-import { useStore } from "../store";
+import { FC, useEffect, useRef, useState } from 'react';
+import { Button, Col, Row } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { useApi } from '../actions/api-factory';
+import { useStore } from '../store';
 const ReadyPlayerMe: FC = () => {
   const [avatarUrl, setAvatarUrl] = useState<string>();
   const rpmIframe = useRef(null);
@@ -16,13 +16,13 @@ const ReadyPlayerMe: FC = () => {
 
       const data = {
         file: base64,
-        source: "Ready Player Me",
-        category: "avatar",
+        source: 'Ready Player Me',
+        category: 'avatar'
       };
 
-      await api.post("/backpack/item/file", data);
+      await api.post('/backpack/item/file', data);
 
-      navigate("/admin/backpack");
+      navigate('/admin/backpack');
     }
   };
 
@@ -42,25 +42,25 @@ const ReadyPlayerMe: FC = () => {
   const receiveMessage = (message: MessageEvent<any>) => {
     const json = parse(message);
 
-    if (json?.source !== "readyplayerme") {
+    if (json?.source !== 'readyplayerme') {
       return;
     }
 
     // Susbribe to all events sent from Ready Player Me once frame is ready
-    if (json.eventName === "v1.frame.ready") {
+    if (json.eventName === 'v1.frame.ready') {
       if (rpmIframe && rpmIframe.current) {
         (rpmIframe.current as any).contentWindow.postMessage(
           JSON.stringify({
-            target: "readyplayerme",
-            type: "subscribe",
-            eventName: "v1.**",
+            target: 'readyplayerme',
+            type: 'subscribe',
+            eventName: 'v1.**'
           }),
-          "*"
+          '*'
         );
       }
     }
 
-    if (json.eventName === "v1.avatar.exported") {
+    if (json.eventName === 'v1.avatar.exported') {
       console.log(`Avatar URL: ${json.data.url}`);
       setAvatarUrl(json.data.url);
     }
@@ -75,9 +75,9 @@ const ReadyPlayerMe: FC = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("message", receiveMessage, false);
+    window.addEventListener('message', receiveMessage, false);
     return () => {
-      window.removeEventListener("message", receiveMessage);
+      window.removeEventListener('message', receiveMessage);
     };
   }, []);
 
@@ -89,18 +89,17 @@ const ReadyPlayerMe: FC = () => {
             id="frame"
             ref={rpmIframe}
             title="Ready Player Me"
-            style={{ width: "800px", height: "600px" }}
+            style={{ width: '800px', height: '600px' }}
             src="https://demo.readyplayer.me/avatar?frameApi"
             allow="camera *; microphone *"
-            hidden={avatarUrl != null}
-          ></iframe>
+            hidden={avatarUrl != null}></iframe>
         </Col>
       </Row>
       <Row>
         <Col xs={12}>
           <h3>{avatarUrl}</h3>
           <Button disabled={avatarUrl == null} onClick={uploadToBackpack}>
-            {store.api.writing ? "Loading ..." : "Save to backpack"}
+            {store.api.writing ? 'Loading ...' : 'Save to backpack'}
           </Button>
         </Col>
       </Row>

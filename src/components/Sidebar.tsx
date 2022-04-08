@@ -1,14 +1,14 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell, faFile } from "@fortawesome/free-regular-svg-icons";
-import { FC } from "react";
-import { Link, LinkProps, useMatch, useResolvedPath } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell, faFile } from '@fortawesome/free-regular-svg-icons';
+import { FC } from 'react';
+import { Link, LinkProps, useMatch, useResolvedPath } from 'react-router-dom';
 
 const ActiveLink: FC<LinkProps> = ({ children, to, ...props }: LinkProps) => {
   let resolved = useResolvedPath(to);
   let match = useMatch({ path: resolved.pathname, end: false });
 
   return (
-    <Link to={to} className={match ? "nav-link active" : "nav-link"} {...props}>
+    <Link to={to} className={match ? 'nav-link active' : 'nav-link'} {...props}>
       {children}
     </Link>
   );

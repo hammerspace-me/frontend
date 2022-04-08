@@ -1,9 +1,9 @@
-import { FC, useState } from "react";
-import { Button, Col, Form, Table } from "react-bootstrap";
-import { useApi } from "../actions/api-factory";
-import { useStore } from "../store";
-import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { FC, useState } from 'react';
+import { Button, Col, Form, Table } from 'react-bootstrap';
+import { useApi } from '../actions/api-factory';
+import { useStore } from '../store';
+import { useForm } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
 
 type FormData = {
   content: string;
@@ -13,42 +13,40 @@ type FormData = {
 
 const BackpackItemForm: FC = () => {
   const [store, setStore] = useStore();
-  let { id } = useParams<"id">();
+  let { id } = useParams<'id'>();
 
-  const backpackItem = store.backpack?.backpackItems.find(
-    (item) => item.content == id
-  );
+  const backpackItem = store.backpack?.backpackItems.find((item) => item.content == id);
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<FormData>({
     defaultValues: {
       content: backpackItem?.content,
       source: backpackItem?.source,
-      category: backpackItem?.category,
-    },
+      category: backpackItem?.category
+    }
   });
 
   const { api } = useApi(store.accessToken);
   const navigate = useNavigate();
 
   const onSubmit = async (data: any) => {
-    const mode = id == null ? "create" : "edit";
+    const mode = id == null ? 'create' : 'edit';
 
-    if (mode == "create") {
-      await api.post("/backpack/item", data);
-      navigate("/admin/backpack");
+    if (mode == 'create') {
+      await api.post('/backpack/item', data);
+      navigate('/admin/backpack');
     } else {
-      await api.post("/backpack/item/" + data.content, data);
-      navigate("/admin/backpack");
+      await api.post('/backpack/item/' + data.content, data);
+      navigate('/admin/backpack');
     }
   };
 
   const errorMessages = {
-    pattern: "Do not use any special charcters.",
-    required: "Do not leave empty.",
+    pattern: 'Do not use any special charcters.',
+    required: 'Do not leave empty.'
   };
 
   return (
@@ -69,36 +67,33 @@ const BackpackItemForm: FC = () => {
               disabled={id != null}
               placeholder="Content"
               isInvalid={errors.content != null}
-              {...register("content", {
+              {...register('content', {
                 required: true,
-                pattern: /^[A-Za-z0-9]+$/i,
+                pattern: /^[A-Za-z0-9]+$/i
               })}
             />
             {id != null ? (
-              <Form.Text className="text-muted">
-                Content (CID) can not be changed.
-              </Form.Text>
+              <Form.Text className="text-muted">Content (CID) can not be changed.</Form.Text>
             ) : (
               <></>
             )}
             <Form.Control.Feedback type="invalid">
-              {errors.content?.type === "pattern" && errorMessages.pattern}
-              {errors.content?.type === "required" && errorMessages.required}
+              {errors.content?.type === 'pattern' && errorMessages.pattern}
+              {errors.content?.type === 'required' && errorMessages.required}
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="category">
             <Form.Label>Category</Form.Label>
             <Form.Select
               aria-label="category select"
-              {...register("category", { required: true })}
-              isInvalid={errors.category != null}
-            >
+              {...register('category', { required: true })}
+              isInvalid={errors.category != null}>
               <option value="avatar">Avatar</option>
               <option value="identity">Identity</option>
               <option value="misc">Misc</option>
             </Form.Select>
             <Form.Control.Feedback type="invalid">
-              {errors.category?.type === "required" && errorMessages.required}
+              {errors.category?.type === 'required' && errorMessages.required}
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="source">
@@ -106,11 +101,11 @@ const BackpackItemForm: FC = () => {
             <Form.Control
               type="text"
               placeholder="Source"
-              {...register("source", { required: true })}
+              {...register('source', { required: true })}
               isInvalid={errors.source != null}
             />
             <Form.Control.Feedback type="invalid">
-              {errors.source?.type === "required" && errorMessages.required}
+              {errors.source?.type === 'required' && errorMessages.required}
             </Form.Control.Feedback>
           </Form.Group>
           <Button variant="primary" type="submit">

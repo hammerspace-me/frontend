@@ -1,9 +1,7 @@
-import { IBackpackItem, useStore } from "../store";
-import { useApi } from "./api-factory";
+import { IBackpackItem, useStore } from '../store';
+import { useApi } from './api-factory';
 
-export const useBackpackActions = (
-  errorHandler?: (message: string) => void
-) => {
+export const useBackpackActions = (errorHandler?: (message: string) => void) => {
   const [store, setStore] = useStore();
   const { api } = useApi(store.accessToken, errorHandler);
 
@@ -11,20 +9,18 @@ export const useBackpackActions = (
     try {
       setStore((old) => ({
         ...old,
-        api: { ...old.api, reading: true },
+        api: { ...old.api, reading: true }
       }));
-      const backpack = await api.get(
-        "backpack/" + store.userAddress?.toLowerCase()
-      );
+      const backpack = await api.get('backpack/' + store.userAddress?.toLowerCase());
       setStore((old) => ({
         ...old,
         backpack: backpack,
-        api: { ...old.api, reading: false },
+        api: { ...old.api, reading: false }
       }));
     } catch (e) {
       setStore((old) => ({
         ...old,
-        api: { ...old.api, reading: false },
+        api: { ...old.api, reading: false }
       }));
     }
   };
@@ -33,17 +29,17 @@ export const useBackpackActions = (
     try {
       setStore((old) => ({
         ...old,
-        api: { ...old.api, writing: true },
+        api: { ...old.api, writing: true }
       }));
-      await api.remove("backpack/item/" + id);
+      await api.remove('backpack/item/' + id);
       setStore((old) => ({
         ...old,
-        api: { ...old.api, writing: false },
+        api: { ...old.api, writing: false }
       }));
     } catch (e) {
       setStore((old) => ({
         ...old,
-        api: { ...old.api, writing: false },
+        api: { ...old.api, writing: false }
       }));
     }
   };

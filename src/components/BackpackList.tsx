@@ -1,9 +1,9 @@
-import { FC, useEffect } from "react";
-import { Button, Table } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { useApi } from "../actions/api-factory";
-import { useBackpackActions } from "../actions/backpackActions";
-import { IBackpackItem, useStore } from "../store";
+import { FC, useEffect } from 'react';
+import { Button, Table } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { useApi } from '../actions/api-factory';
+import { useBackpackActions } from '../actions/backpackActions';
+import { IBackpackItem, useStore } from '../store';
 
 const BackpackList: FC = () => {
   const [store, setStore] = useStore();
@@ -20,11 +20,11 @@ const BackpackList: FC = () => {
   };
 
   const onCreate = async () => {
-    navigate("/admin/backpack/item");
+    navigate('/admin/backpack/item');
   };
 
   const onEdit = async (item: IBackpackItem) => {
-    navigate("/admin/backpack/item/" + item.content);
+    navigate('/admin/backpack/item/' + item.content);
   };
 
   return store.backpack ? (
@@ -32,10 +32,10 @@ const BackpackList: FC = () => {
       <Table hover responsive>
         <thead>
           <tr>
-            <th key={"content"}>Content</th>
-            <th key={"category"}>Category</th>
-            <th key={"source"}>Source</th>
-            <th key={"actions"}>Actions</th>
+            <th key={'content'}>Content</th>
+            <th key={'category'}>Category</th>
+            <th key={'source'}>Source</th>
+            <th key={'actions'}>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -45,18 +45,10 @@ const BackpackList: FC = () => {
               <td>{item.category}</td>
               <td>{item.source}</td>
               <td>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  onClick={() => onEdit(item)}
-                >
+                <Button size="sm" variant="secondary" onClick={() => onEdit(item)}>
                   Edit
                 </Button>
-                <Button
-                  size="sm"
-                  variant="danger"
-                  onClick={() => onDelete(item)}
-                >
+                <Button size="sm" variant="danger" onClick={() => onDelete(item)}>
                   Del
                 </Button>
               </td>

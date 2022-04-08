@@ -1,9 +1,9 @@
-import storeFactory from "./store-factory";
-import Cookies from "universal-cookie";
+import storeFactory from './store-factory';
+import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
-const accessToken = cookies.get("access_token");
-const userAddress = cookies.get("user_address");
+const accessToken = cookies.get('access_token');
+const userAddress = cookies.get('user_address');
 
 export interface IApi {
   reading: boolean;
@@ -33,9 +33,9 @@ const storeDefault: IStore = {
   userAddress: userAddress,
   api: {
     reading: false,
-    writing: false,
+    writing: false
   },
-  backpack: undefined,
+  backpack: undefined
 };
 
 const { Provider: StoreProvider, useStore } = storeFactory<IStore>();
