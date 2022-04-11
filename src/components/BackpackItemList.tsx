@@ -2,16 +2,18 @@ import { FC, useEffect } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useBackpackActions } from '../actions/backpackActions';
+import { useModalActions } from '../actions/modalActions';
 import { IBackpackItem, useStore } from '../store';
 
-const BackpackList: FC = () => {
+const BackpackItemList: FC = () => {
   const [store] = useStore();
   const navigate = useNavigate();
   const { getBackpack, deleteBackpackItem } = useBackpackActions();
+  const { showTechnologyProviderModal } = useModalActions();
 
   useEffect(() => {
     getBackpack();
-  }, [getBackpack]);
+  }, []);
 
   const onDelete = async (item: IBackpackItem) => {
     await deleteBackpackItem(item.content);
@@ -19,7 +21,7 @@ const BackpackList: FC = () => {
   };
 
   const onCreate = async () => {
-    navigate('/admin/backpack/item');
+    showTechnologyProviderModal();
   };
 
   const onEdit = async (item: IBackpackItem) => {
@@ -64,4 +66,4 @@ const BackpackList: FC = () => {
   );
 };
 
-export default BackpackList;
+export default BackpackItemList;

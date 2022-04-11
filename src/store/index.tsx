@@ -25,6 +25,7 @@ export interface IStore {
   accessToken?: string;
   userAddress?: string;
   backpack?: IBackpack;
+  technologyProviderModal: boolean;
   api: IApi;
 }
 
@@ -35,7 +36,8 @@ const storeDefault: IStore = {
     reading: false,
     writing: false
   },
-  backpack: undefined
+  backpack: undefined,
+  technologyProviderModal: false
 };
 
 const { Provider: StoreProvider, useStore } = storeFactory<IStore>();
