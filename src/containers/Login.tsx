@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { useApi } from '../actions/api-factory';
 import { Button, Row, Col } from 'react-bootstrap';
@@ -10,11 +10,10 @@ const Login: FC = () => {
   const [store, setStore] = useStore();
   const { api } = useApi();
   const navigate = useNavigate();
+  const _window: any = window;
 
-  const handleClick = async () => {
+  const handleLogin = async () => {
     /* eslint-disable */
-    const _window: any = window;
-    if (!_window.ethereum) throw new Error('No crypto wallet found. Please install it.');
     await _window.ethereum.send('eth_requestAccounts');
     const provider = new ethers.providers.Web3Provider(_window.ethereum);
     /* eslint-enable */
@@ -25,18 +24,12 @@ const Login: FC = () => {
     const nonce = await api.post('auth/request', {
       backpack: address
     });
-
-    console.log('Received nonce ' + nonce);
-
     const signature = await signer.signMessage(nonce.nonce);
-
-    console.log('Signed nonce ' + signature);
 
     setStore((old) => ({
       ...old,
       api: { ...old.api, writing: true }
     }));
-
     const login = await api.post('auth/login', {
       address: address,
       signature: signature
@@ -45,22 +38,27 @@ const Login: FC = () => {
     const cookies = new Cookies();
     cookies.set('access_token', login.accessToken);
     cookies.set('user_address', address);
-
     setStore((old) => ({
       ...old,
       accessToken: login.accessToken,
       userAddress: address
     }));
+    navigate('/', { replace: true });
+  };
 
-    navigate('/admin', { replace: true });
+  const handleInstall = async () => {
+    window.location.replace('https://metamask.io/download');
   };
 
   return (
     <Row>
       <Col>
-        <h1>Login</h1>
-        <Button onClick={handleClick} disabled={store.backpack ? true : false}>
-          Login with Metamask
+        <h1>Login using your wallet</h1>
+        <p>Connect your account to login to Backpack.</p>
+        <Button
+          onClick={!_window.ethereum ? handleInstall : handleLogin}
+          disabled={store.backpack ? true : false}>
+          {!_window.ethereum ? 'Install Metamask' : 'Continue with Metamask'}
         </Button>
       </Col>
     </Row>

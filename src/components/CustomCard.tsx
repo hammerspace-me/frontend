@@ -21,7 +21,7 @@ const CustomCard: FC = () => {
 
   const onClick = () => {
     hideTechnologyProviderModal();
-    navigate('/admin/backpack/item');
+    navigate('/item');
   };
 
   return (

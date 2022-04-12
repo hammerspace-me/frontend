@@ -27,6 +27,7 @@ export interface IStore {
   backpack?: IBackpack;
   technologyProviderModal: boolean;
   api: IApi;
+  toggleListGrid: boolean;
 }
 
 const storeDefault: IStore = {
@@ -37,7 +38,8 @@ const storeDefault: IStore = {
     writing: false
   },
   backpack: undefined,
-  technologyProviderModal: false
+  technologyProviderModal: false,
+  toggleListGrid: false
 };
 
 const { Provider: StoreProvider, useStore } = storeFactory<IStore>();

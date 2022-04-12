@@ -52,7 +52,7 @@ const TechnologyProviderCard: FC<TechnologyProviderCardProps> = (
         category: 'Avatar',
         description:
           'ReadyPlayer.Me is an avatar service where you can create your personalized avatar for the Metaverse.',
-        link: '/admin/applications/readyplayerme'
+        link: '/readyplayerme'
       };
       break;
     case TechnologyProvider.CryptoAvatars:

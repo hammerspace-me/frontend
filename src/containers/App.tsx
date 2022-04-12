@@ -1,33 +1,11 @@
 import { FC } from 'react';
 import { Container } from 'react-bootstrap';
-import {
-  BrowserRouter,
-  Link,
-  LinkProps,
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-  useMatch,
-  useResolvedPath
-} from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import Header from '../components/Header';
 import { useStore } from '../store';
 import { StoreProvider, storeDefault } from '../store';
+import Backpack from './Backpack';
 import Login from './Login';
-import Admin from './Admin';
-import Logo from '../assets/logo.png';
-import LoginButton from '../components/LoginButton';
-
-const ActiveLink: FC<LinkProps> = ({ children, to, ...props }: LinkProps) => {
-  const resolved = useResolvedPath(to);
-  const match = useMatch({ path: resolved.pathname, end: false });
-
-  return (
-    <Link to={to} className={match ? 'nav-link active' : 'nav-link'} {...props}>
-      {children}
-    </Link>
-  );
-};
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   const [store] = useStore();
@@ -48,36 +26,18 @@ const App: FC = () => {
   return (
     <StoreProvider initialValue={storeDefault}>
       <BrowserRouter>
+        <Header></Header>
         <Container>
-          <header className="p-3">
-            <div className="container">
-              <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <img alt="Backpack logo" className="bi me-2" width="50" src={Logo} />
-                <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                  <li>
-                    <ActiveLink to="/">Home</ActiveLink>
-                  </li>
-                  <li>
-                    <ActiveLink to="/admin">Administration</ActiveLink>
-                  </li>
-                </ul>
-                <div className="text-end">
-                  <LoginButton />
-                </div>
-              </div>
-            </div>
-          </header>
-
           <Routes>
-            <Route path="/login" element={<Login />} />
             <Route
-              path="/admin/*"
+              path="*"
               element={
                 <RequireAuth>
-                  <Admin />
+                  <Backpack />
                 </RequireAuth>
               }
             />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </Container>
       </BrowserRouter>

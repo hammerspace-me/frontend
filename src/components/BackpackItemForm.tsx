@@ -37,10 +37,10 @@ const BackpackItemForm: FC = () => {
 
     if (mode === 'create') {
       await api.post('/backpack/item', data);
-      navigate('/admin/backpack');
+      navigate('/');
     } else {
       await api.post('/backpack/item/' + data.content, data);
-      navigate('/admin/backpack');
+      navigate('/');
     }
   };
 

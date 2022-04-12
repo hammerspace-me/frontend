@@ -3,27 +3,36 @@ import { Button, Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '../actions/api-factory';
 import { useStore } from '../store';
+import ReadyPlayerMeLogo from '../assets/readyplayerme.svg';
+
+enum ReadyPlayerMeState {
+  Init,
+  Created,
+  Upload,
+  Finished
+}
 
 const ReadyPlayerMe: FC = () => {
+  const [state, setState] = useState<ReadyPlayerMeState>(ReadyPlayerMeState.Init);
   const [avatarUrl, setAvatarUrl] = useState<string>();
+
   const rpmIframe = useRef(null);
   const [store] = useStore();
   const { api } = useApi(store.accessToken);
   const navigate = useNavigate();
 
   const uploadToBackpack = async () => {
+    setState(ReadyPlayerMeState.Upload);
     if (avatarUrl) {
       const base64 = await getBase64FromUrl(avatarUrl);
-
+      console.log(base64);
       const data = {
         file: base64,
         source: 'Ready Player Me',
         category: 'avatar'
       };
-
       await api.post('/backpack/item/file', data);
-
-      navigate('/admin/backpack');
+      navigate('/');
     }
   };
 
@@ -63,7 +72,7 @@ const ReadyPlayerMe: FC = () => {
     }
 
     if (json.eventName === 'v1.avatar.exported') {
-      console.log(`Avatar URL: ${json.data.url}`);
+      setState(ReadyPlayerMeState.Created);
       setAvatarUrl(json.data.url);
     }
   };
@@ -84,25 +93,43 @@ const ReadyPlayerMe: FC = () => {
     };
   }, [receiveMessage]);
 
+  const getButtonText = () => {
+    switch (state) {
+      case ReadyPlayerMeState.Init:
+        return 'Create an avatar first';
+      case ReadyPlayerMeState.Created:
+        return 'Create backpack item';
+      case ReadyPlayerMeState.Upload:
+        return 'Uploading to IPFS...';
+      case ReadyPlayerMeState.Finished:
+        return 'Done';
+    }
+  };
+
   return (
     <>
+      <Row>
+        <Col xs={12}>
+          <img src={ReadyPlayerMeLogo} width="100"></img>
+        </Col>
+      </Row>
       <Row>
         <Col xs={12}>
           <iframe
             id="frame"
             ref={rpmIframe}
             title="Ready Player Me"
-            style={{ width: '800px', height: '600px' }}
+            style={{ width: '800px', height: '600px', marginTop: '20px' }}
             src="https://demo.readyplayer.me/avatar?frameApi"
             allow="camera *; microphone *"
-            hidden={avatarUrl != null}></iframe>
+            hidden={state != ReadyPlayerMeState.Init}></iframe>
+          <h3>{avatarUrl}</h3>
         </Col>
       </Row>
       <Row>
         <Col xs={12}>
-          <h3>{avatarUrl}</h3>
-          <Button disabled={avatarUrl == null} onClick={uploadToBackpack}>
-            {store.api.writing ? 'Loading ...' : 'Save to backpack'}
+          <Button disabled={state !== ReadyPlayerMeState.Created} onClick={uploadToBackpack}>
+            {getButtonText()}
           </Button>
         </Col>
       </Row>
