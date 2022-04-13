@@ -2,16 +2,17 @@ import { Canvas } from '@react-three/fiber';
 import { FC, Suspense, useEffect } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useBackpackActions } from '../actions/backpackActions';
-import { IBackpackItem, useStore } from '../store';
+import { useStore } from '../store';
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-const Scene: FC = () => {
+interface ModelProps {
+  modelUrl: string;
+}
+
+const Model: FC<ModelProps> = (props: ModelProps) => {
   // TODO: pass in URL of GLTF model
-  const gltf = useLoader(
-    GLTFLoader,
-    'https://cloudflare-ipfs.com/ipfs/bafybeibiffgffyzsferoimzsck7mmdhgezmy2cklnxnlmcz6nqqv67ecfm/default.glb'
-  );
+  const gltf = useLoader(GLTFLoader, props.modelUrl);
   return (
     <Suspense fallback={null}>
       <primitive object={gltf.scene} />
@@ -21,7 +22,7 @@ const Scene: FC = () => {
 
 const BackpackItemGrid: FC = () => {
   const [store] = useStore();
-  const { getBackpack, deleteBackpackItem } = useBackpackActions();
+  const { getBackpack } = useBackpackActions();
 
   useEffect(() => {
     getBackpack();
@@ -39,10 +40,20 @@ const BackpackItemGrid: FC = () => {
           <Card>
             <Card.Body>
               <Canvas
-                camera={{ position: [2, 0, 0], near: 0.005, far: 10000, fov: 80 }}
-                style={{ backgroundColor: 'white', minHeight: 200 }}>
+                camera={{
+                  position: [0, 1.6, 2],
+                  rotation: [0, 0, 0],
+                  aspect: 1,
+                  near: 0.01,
+                  far: 1000,
+                  fov: 50,
+                  zoom: 3
+                }}
+                style={{ backgroundColor: 'white', minHeight: 280 }}>
                 <ambientLight intensity={1} />
-                <Scene></Scene>
+                <Model
+                  modelUrl={'https://cloudflare-ipfs.com/ipfs/' + item.content + '/default.glb'}
+                />
               </Canvas>
               <Card.Title>{item.content}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{item.source}</Card.Subtitle>
