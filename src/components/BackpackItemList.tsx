@@ -1,15 +1,13 @@
 import { FC, useEffect } from 'react';
-import { Button, Col, Row, Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useBackpackActions } from '../actions/backpackActions';
-import { useModalActions } from '../actions/modalActions';
 import { IBackpackItem, useStore } from '../store';
 
 const BackpackItemList: FC = () => {
   const [store] = useStore();
   const navigate = useNavigate();
   const { getBackpack, deleteBackpackItem } = useBackpackActions();
-  const { showTechnologyProviderModal } = useModalActions();
 
   useEffect(() => {
     getBackpack();
@@ -18,10 +16,6 @@ const BackpackItemList: FC = () => {
   const onDelete = async (item: IBackpackItem) => {
     await deleteBackpackItem(item.content);
     getBackpack();
-  };
-
-  const onCreate = async () => {
-    showTechnologyProviderModal();
   };
 
   const onEdit = async (item: IBackpackItem) => {

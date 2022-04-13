@@ -110,7 +110,7 @@ const ReadyPlayerMe: FC = () => {
     <>
       <Row>
         <Col xs={12}>
-          <img src={ReadyPlayerMeLogo} width="100"></img>
+          <img src={ReadyPlayerMeLogo} alt="Ready Player Me Logo" width="100"></img>
         </Col>
       </Row>
       <Row>
@@ -122,7 +122,7 @@ const ReadyPlayerMe: FC = () => {
             style={{ width: '800px', height: '600px', marginTop: '20px' }}
             src="https://demo.readyplayer.me/avatar?frameApi"
             allow="camera *; microphone *"
-            hidden={state != ReadyPlayerMeState.Init}></iframe>
+            hidden={state !== ReadyPlayerMeState.Init}></iframe>
           <h3>{avatarUrl}</h3>
         </Col>
       </Row>

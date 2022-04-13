@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { ethers } from 'ethers';
 import { useApi } from '../actions/api-factory';
 import { Button, Row, Col } from 'react-bootstrap';
@@ -10,7 +10,10 @@ const Login: FC = () => {
   const [store, setStore] = useStore();
   const { api } = useApi();
   const navigate = useNavigate();
+
+  /* eslint-disable */
   const _window: any = window;
+  /* eslint-enable */
 
   const handleLogin = async () => {
     /* eslint-disable */
