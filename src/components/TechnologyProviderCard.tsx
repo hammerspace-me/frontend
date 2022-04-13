@@ -62,7 +62,7 @@ const TechnologyProviderCard: FC<TechnologyProviderCardProps> = (
         category: 'Avatar',
         description:
           'CryptoAvatars is an avatar service where you can create your personalized avatar for the Metaverse.',
-        link: ''
+        link: '/cryptoavatars'
       };
       break;
     case TechnologyProvider.Meebits:
@@ -72,7 +72,7 @@ const TechnologyProviderCard: FC<TechnologyProviderCardProps> = (
         category: 'Avatar',
         description:
           'Meebits is an avatar service where you can create your personalized avatar for the Metaverse.',
-        link: ''
+        link: '/meebits'
       };
       break;
     default:
