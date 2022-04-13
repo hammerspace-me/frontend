@@ -3,9 +3,11 @@ import { Button, Container, Navbar } from 'react-bootstrap';
 import Logo from '../assets/logo.png';
 import Cookies from 'universal-cookie';
 import { useStore } from '../store';
+import { useNavigate } from 'react-router-dom';
 
 const Header: FC = () => {
   const [store, setStore] = useStore();
+  const navigate = useNavigate();
 
   const logout = () => {
     setStore((old) => ({
@@ -21,7 +23,7 @@ const Header: FC = () => {
   return (
     <Navbar>
       <Container>
-        <Navbar.Brand>
+        <Navbar.Brand onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
           <img alt="Backpack" src={Logo} width="30" className="d-inline-block align-top" /> Backpack
         </Navbar.Brand>
         {store.accessToken ? <Button onClick={logout}>Logout</Button> : null}
