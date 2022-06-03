@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import CustomCard from './CustomCard';
-import TechnologyProviderCard, { TechnologyProvider } from './TechnologyProviderCard';
+import TechnologyProviderCard from './TechnologyProviderCard';
+import { TechnologyProvider } from './TechnologyProviderModal';
 
 const styles = {
   row: {
@@ -9,26 +10,28 @@ const styles = {
   }
 };
 
-const TechnologyProviderList: FC = () => {
+interface TechnologyProviderListProps {
+  providers: [TechnologyProvider];
+}
+
+const TechnologyProviderList: FC<TechnologyProviderListProps> = (
+  props: TechnologyProviderListProps
+) => {
   return (
     <Container fluid>
-      <Row xs={3} style={styles.row}>
-        <Col>
-          <TechnologyProviderCard
-            provider={TechnologyProvider.ReadyPlayerMe}></TechnologyProviderCard>
-        </Col>
-        <Col>
-          <TechnologyProviderCard
-            provider={TechnologyProvider.CryptoAvatars}></TechnologyProviderCard>
-        </Col>
-        <Col>
-          <TechnologyProviderCard provider={TechnologyProvider.Meebits}></TechnologyProviderCard>
-        </Col>
-      </Row>
-      <Row xs={3} style={styles.row}>
-        <Col>
-          <CustomCard></CustomCard>
-        </Col>
+      <Row xs={2} style={styles.row}>
+        {props.providers.map((provider) => {
+          return (
+            <Col key={provider.title}>
+              <TechnologyProviderCard
+                description={provider.description}
+                image={provider.image}
+                title={provider.title}
+                onClick={provider.onClick}></TechnologyProviderCard>
+            </Col>
+          );
+        })}
+        <CustomCard></CustomCard>
       </Row>
     </Container>
   );

@@ -11,7 +11,7 @@ export const useBackpackActions = (errorHandler?: (message: string) => void) => 
         ...old,
         api: { ...old.api, reading: true }
       }));
-      const backpack = await api.get('backpack/' + store.userAddress?.toLowerCase());
+      const backpack = await api.get('backpack/owner');
       setStore((old) => ({
         ...old,
         backpack: backpack,

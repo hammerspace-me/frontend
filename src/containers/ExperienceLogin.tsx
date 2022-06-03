@@ -1,15 +1,22 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { ethers } from 'ethers';
 import { useApi } from '../actions/api-factory';
 import { Button, Row, Col } from 'react-bootstrap';
 import { useStore } from '../store';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-const Login: FC = () => {
+// A custom hook that builds on useLocation to parse query strings
+const useQuery = () => {
+  const { search } = useLocation();
+  return useMemo(() => new URLSearchParams(search), [search]);
+};
+
+const ExperienceLogin: FC = () => {
   const [store, setStore] = useStore();
   const { api } = useApi();
   const navigate = useNavigate();
+  const query = useQuery();
 
   /* eslint-disable */
   const _window: any = window;
@@ -46,18 +53,30 @@ const Login: FC = () => {
       accessToken: login.accessToken,
       userAddress: address
     }));
-    navigate('/', { replace: true });
+    if (query.get('redirect')) {
+      window.location.replace(query.get('redirect')!);
+    }
   };
 
   const handleInstall = async () => {
     window.location.replace('https://metamask.io/download');
   };
 
+  if (!query.get('redirect')) {
+    return (
+      <Row>
+        <Col>
+          <h1>No redirection URL present</h1>
+        </Col>
+      </Row>
+    );
+  }
+
   return (
     <Row>
       <Col>
-        <h1>Login using your wallet</h1>
-        <p>Connect your account to login to Backpack.</p>
+        <h1>Application "Meditation PoC" is requesting access to your Backpack</h1>
+        <p>Login with Metamask to grant access.</p>
         <Button
           onClick={!_window.ethereum ? handleInstall : handleLogin}
           disabled={store.backpack ? true : false}>
@@ -68,4 +87,4 @@ const Login: FC = () => {
   );
 };
 
-export default Login;
+export default ExperienceLogin;

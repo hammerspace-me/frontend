@@ -14,12 +14,12 @@ const BackpackItemList: FC = () => {
   }, []);
 
   const onDelete = async (item: IBackpackItem) => {
-    await deleteBackpackItem(item.content);
+    await deleteBackpackItem(item.id);
     getBackpack();
   };
 
   const onEdit = async (item: IBackpackItem) => {
-    navigate('/item/' + item.content);
+    navigate('/item/' + item.id);
   };
 
   return store.backpack ? (

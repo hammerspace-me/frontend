@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import { useStore } from '../store';
 import { StoreProvider, storeDefault } from '../store';
 import Backpack from './Backpack';
+import ExperienceLogin from './ExperienceLogin';
 import Login from './Login';
 
 function RequireAuth({ children }: { children: JSX.Element }) {
@@ -38,6 +39,7 @@ const App: FC = () => {
               }
             />
             <Route path="/login" element={<Login />} />
+            <Route path="/experience-login" element={<ExperienceLogin />} />
           </Routes>
         </Container>
       </BrowserRouter>

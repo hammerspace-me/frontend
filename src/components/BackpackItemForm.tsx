@@ -4,8 +4,10 @@ import { useApi } from '../actions/api-factory';
 import { IBackpackItem, useStore } from '../store';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useBackpackActions } from '../actions/backpackActions';
 
 type FormData = {
+  id: string;
   content: string;
   category: string;
   source: string;
@@ -14,8 +16,9 @@ type FormData = {
 const BackpackItemForm: FC = () => {
   const [store] = useStore();
   const { id } = useParams<'id'>();
+  const { getBackpack } = useBackpackActions();
 
-  const backpackItem = store.backpack?.backpackItems.find((item) => item.content === id);
+  const backpackItem = store.backpack?.backpackItems.find((item) => item.id === id);
 
   const {
     register,
@@ -23,6 +26,7 @@ const BackpackItemForm: FC = () => {
     formState: { errors }
   } = useForm<FormData>({
     defaultValues: {
+      id: backpackItem?.id,
       content: backpackItem?.content,
       source: backpackItem?.source,
       category: backpackItem?.category
@@ -37,9 +41,11 @@ const BackpackItemForm: FC = () => {
 
     if (mode === 'create') {
       await api.post('/backpack/item', data);
+      await getBackpack();
       navigate('/');
     } else {
-      await api.post('/backpack/item/' + data.content, data);
+      await api.post('/backpack/item/' + data.id, data);
+      await getBackpack();
       navigate('/');
     }
   };
@@ -68,8 +74,7 @@ const BackpackItemForm: FC = () => {
               placeholder="Content"
               isInvalid={errors.content != null}
               {...register('content', {
-                required: true,
-                pattern: /^[A-Za-z0-9]+$/i
+                required: true
               })}
             />
             {id != null ? (
