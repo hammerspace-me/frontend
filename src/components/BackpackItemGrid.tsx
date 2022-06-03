@@ -31,8 +31,13 @@ const BackpackItemGrid: FC = () => {
       ))}
     </Row>
   ) : (
-    <h1>No backpack found.</h1>
+    <LoadingOrError />
   );
+};
+
+const LoadingOrError: FC = () => {
+  const [store] = useStore();
+  return store.api.reading ? <h1>Loading...</h1> : <h1>No backpack found.</h1>;
 };
 
 export default BackpackItemGrid;
