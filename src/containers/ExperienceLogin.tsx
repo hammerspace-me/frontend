@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import { useApi } from '../actions/api-factory';
 import { Button, Row, Col } from 'react-bootstrap';
 import { useStore } from '../store';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 // A custom hook that builds on useLocation to parse query strings
@@ -15,7 +15,6 @@ const useQuery = () => {
 const ExperienceLogin: FC = () => {
   const [store, setStore] = useStore();
   const { api } = useApi();
-  const navigate = useNavigate();
   const query = useQuery();
 
   /* eslint-disable */
@@ -53,8 +52,10 @@ const ExperienceLogin: FC = () => {
       accessToken: login.accessToken,
       userAddress: address
     }));
-    if (query.get('redirect')) {
-      window.location.replace(query.get('redirect')!);
+
+    const redirectQuery = query.get('redirect');
+    if (redirectQuery) {
+      window.location.replace(redirectQuery);
     }
   };
 

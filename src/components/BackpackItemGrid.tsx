@@ -1,9 +1,6 @@
-import { Canvas } from '@react-three/fiber';
-import { FC, Suspense, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useStore } from '../store';
-import { useLoader } from '@react-three/fiber';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { useBackpackActions } from '../actions/backpackActions';
 import { AvatarErrorBoundary } from './AvatarErrorBoundary';
 import AvatarPreview from './AvatarPreview';

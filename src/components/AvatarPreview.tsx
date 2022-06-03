@@ -2,7 +2,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { FC, Suspense, useEffect, useState } from 'react';
 import { useLoader } from '@react-three/fiber';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { VRM, VRMSchema, VRMUtils } from '@pixiv/three-vrm';
+import { VRM, VRMSchema } from '@pixiv/three-vrm';
 import { PerspectiveCamera, Vector3 } from 'three';
 
 interface AvatarPreviewProps {
