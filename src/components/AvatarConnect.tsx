@@ -10,7 +10,11 @@ import { AvatarErrorBoundary } from './AvatarErrorBoundary';
 
 const AvatarConnect: FC = () => {
   const [store] = useStore();
-  const { api } = useApi(store.accessToken);
+  const [error, setError] = useState<string>();
+  const errorHandler = (message: string) => {
+    setError(message);
+  };
+  const { api } = useApi(store.accessToken, errorHandler);
   const [bridgeResult, setBridgeResult] = useState<BridgeResult>();
   const [uploading, setUploading] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -90,9 +94,13 @@ const AvatarConnect: FC = () => {
           </Row>
           <Row>
             <Col xs={12}>
-              <Button onClick={uploadToBackpack} disabled={uploading}>
-                {uploading ? 'Uploading...' : 'Upload'}
-              </Button>
+              {error ? (
+                <h4 style={{ color: 'red' }}>Encountered an error {error}</h4>
+              ) : (
+                <Button onClick={uploadToBackpack} disabled={uploading}>
+                  {uploading ? 'Uploading...' : 'Upload'}
+                </Button>
+              )}
             </Col>
           </Row>
         </>
