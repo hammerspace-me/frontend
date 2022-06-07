@@ -52,7 +52,8 @@ const AvatarConnect: FC = () => {
         filename: extractFilename(bridgeResult.avatar.uri),
         fileExtension: bridgeResult.avatar.format,
         source: 'avatar-connect-' + bridgeResult.provider,
-        category: 'avatar'
+        category: 'avatar',
+        metadata: bridgeResult.metadata
       };
       await api.post('/backpack/item/file', data);
       navigate('/');
