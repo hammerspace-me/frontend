@@ -1,11 +1,12 @@
 import { FC, useEffect, useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Card, Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '../actions/api-factory';
 import { useStore } from '../store';
 import AvatarConnectLogo from '../assets/avatarconnect.svg';
 import { BridgeResult } from '@avatarconnect/sdk';
 import AvatarPreview from './AvatarPreview';
+import { AvatarErrorBoundary } from './AvatarErrorBoundary';
 
 const AvatarConnect: FC = () => {
   const [store] = useStore();
@@ -70,21 +71,38 @@ const AvatarConnect: FC = () => {
 
   return (
     <>
-      <Row>
-        <Col xs={12}>
-          <img src={AvatarConnectLogo} alt="AvatarConnect Logo" width="100"></img>
-          {bridgeResult ? (
-            <AvatarPreview avatarUri={bridgeResult.avatar.uri}></AvatarPreview>
-          ) : null}
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12}>
-          <Button onClick={uploadToBackpack} disabled={uploading}>
-            {uploading ? 'Loading...' : 'Upload'}
-          </Button>
-        </Col>
-      </Row>
+      <img src={AvatarConnectLogo} alt="AvatarConnect Logo" width="100"></img>
+      {bridgeResult ? (
+        <>
+          <Row>
+            <Col xs={6}>
+              <Card style={{ marginTop: 20, marginBottom: 20 }}>
+                <Card.Body>
+                  <AvatarErrorBoundary>
+                    <AvatarPreview avatarUri={bridgeResult.avatar.uri} />
+                  </AvatarErrorBoundary>
+                  <Card.Title>{bridgeResult.avatar.uri}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">{bridgeResult.provider}</Card.Subtitle>
+                  <Card.Subtitle className="mb-2 text-muted">Avatar</Card.Subtitle>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <Button onClick={uploadToBackpack} disabled={uploading}>
+                {uploading ? 'Uploading...' : 'Upload'}
+              </Button>
+            </Col>
+          </Row>
+        </>
+      ) : (
+        <Row>
+          <Col xs={6}>
+            <h3>Follow the steps in AvatarConnect</h3>
+          </Col>
+        </Row>
+      )}
     </>
   );
 };

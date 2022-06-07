@@ -65,7 +65,7 @@ const VRMAvatar: FC<AvatarPreviewProps> = (props: AvatarPreviewProps) => {
       VRM.from(gltf as unknown as GLTF).then((vrm) => {
         const head = vrm?.humanoid?.getBoneNode('head' as VRMSchema.HumanoidBoneName);
         if (head) {
-          const headPosition = new Vector3(0.0, head.getWorldPosition(new Vector3()).y, 1);
+          const headPosition = new Vector3(0.0, head.getWorldPosition(new Vector3()).y + 0.1, 1.5);
           setPosition(headPosition);
         }
       });
@@ -79,7 +79,7 @@ const VRMAvatar: FC<AvatarPreviewProps> = (props: AvatarPreviewProps) => {
     <Canvas style={{ backgroundColor: 'white', height: 280 }} camera={camera}>
       <ambientLight intensity={1} />
       <Suspense fallback={null}>
-        <primitive object={gltf.scene} />
+        <primitive object={gltf.scene} rotation={[0, 110, 0]} />
       </Suspense>
       <ChangeCamera />
     </Canvas>
