@@ -29,8 +29,8 @@ const AvatarConnect: FC = () => {
   const handleBridgeResult = (result: BridgeResult) => {
     // replace Pinata gateway with Cloudflare as gateway has rate limits and CORS problems
     const replacedUrl = result.avatar.uri.replace(
-      'https://gateway.pinata.cloud',
-      'https://cloudflare-ipfs.com'
+      'https://gateway.pinata.cloud/ipfs/',
+      process.env.REACT_APP_IPFS_GATEWAY!
     );
     result.avatar.uri = replacedUrl;
     setBridgeResult(result);

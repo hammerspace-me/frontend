@@ -11,7 +11,7 @@ export const useApi = (accessToken?: string, errorHandler?: (message: string) =>
 
   return {
     api: new Api(
-      process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : '/api/',
+      process.env.REACT_APP_BACKPACK_BACKEND!,
       errorHandler || errorNotification,
       noAuthRedirection,
       accessToken

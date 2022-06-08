@@ -9,15 +9,15 @@ const userAddress = cookies.get('user_address');
 const avatarConnectBridge = new AvatarConnect(
   [
     // @ts-expect-error: AvatarConnect expects weird type
-    ['ready-player-me', { gateway: 'mona' }],
+    ['ready-player-me', { gateway: process.env.REACT_APP_AC_RPM_GATEWAY }],
     [
       // @ts-expect-error: AvatarConnect expects weird type
       'crypto-avatars',
       {
         // @ts-expect-error: AvatarConnect expects weird type
-        apiKey: '$2b$10$Enqof4ligHNFwhHmToH3ROhwrEXQ/XgDyKeM78CAt0MPN4EsHSGHO',
+        apiKey: process.env.REACT_APP_AC_CA_API_KEY,
         // @ts-expect-error: AvatarConnect expects weird type
-        address: '0xd36c25d4a1c0216caaa1f88c9c7ef6c220c9e710'
+        address: process.env.REACT_APP_AC_CA_ADDRESS
       }
     ],
     // @ts-expect-error: AvatarConnect expects weird type

@@ -6,6 +6,18 @@ import { useStore } from '../store';
 import { useLocation } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
+// TODO: Generalize this instead of tying it to the Meditation PoC
+/* const checkApplicationWhitelist = (application: string) => {
+  const whitelist = ['Meditation PoC'];
+  return whitelist.includes(application);
+};
+
+const transformUrlToApplication = (redirectUrl: string) => {
+  if (redirectUrl.startsWith('http://localhost:3000')) {
+    return 'Meditation PoC';
+  }
+}; */
+
 // A custom hook that builds on useLocation to parse query strings
 const useQuery = () => {
   const { search } = useLocation();

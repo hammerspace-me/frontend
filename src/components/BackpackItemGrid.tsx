@@ -20,7 +20,7 @@ const BackpackItemGrid: FC = () => {
           <Card>
             <Card.Body>
               <AvatarErrorBoundary>
-                <AvatarPreview avatarUri={'https://cloudflare-ipfs.com/ipfs/' + item.content} />
+                <AvatarPreview avatarUri={process.env.REACT_APP_IPFS_GATEWAY + item.content} />
               </AvatarErrorBoundary>
               <Card.Title>{item.content}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{item.source}</Card.Subtitle>
