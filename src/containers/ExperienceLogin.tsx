@@ -57,8 +57,10 @@ const ExperienceLogin: FC = () => {
     });
 
     const cookies = new Cookies();
-    cookies.set('access_token', login.accessToken);
-    cookies.set('user_address', address);
+    cookies.set('access_token', login.accessToken, {
+      domain: process.env.REACT_APP_DOMAIN || 'localhost'
+    });
+    cookies.set('user_address', address, { domain: process.env.REACT_APP_DOMAIN || 'localhost' });
     setStore((old) => ({
       ...old,
       accessToken: login.accessToken,
