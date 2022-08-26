@@ -9,6 +9,12 @@ interface AvatarPreviewProps {
   avatarUri: string;
 }
 
+const canvasStyle = {
+  height: 280
+};
+
+const canvasClassName = 'bg-gray-100 rounded-md mt-4';
+
 const AvatarPreview: FC<AvatarPreviewProps> = (props: AvatarPreviewProps) => {
   const extractFileFormat = (uri: string) => {
     return uri.split(/[#?]/)[0].split('.')?.pop()?.trim();
@@ -36,7 +42,8 @@ const GLTFAvatar: FC<AvatarPreviewProps> = (props: AvatarPreviewProps) => {
         fov: 50,
         zoom: 3
       }}
-      style={{ backgroundColor: 'white', height: 280 }}>
+      style={canvasStyle}
+      className={canvasClassName}>
       <ambientLight intensity={1} />
       <Suspense fallback={null}>
         <primitive object={gltf.scene} />
@@ -76,7 +83,7 @@ const VRMAvatar: FC<AvatarPreviewProps> = (props: AvatarPreviewProps) => {
   }, [gltf]);
 
   return (
-    <Canvas style={{ backgroundColor: 'white', height: 280 }} camera={camera}>
+    <Canvas style={canvasStyle} className={canvasClassName} camera={camera}>
       <ambientLight intensity={1} />
       <Suspense fallback={null}>
         <primitive object={gltf.scene} rotation={[0, 110, 0]} />

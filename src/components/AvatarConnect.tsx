@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import Button from './Button';
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '../actions/api-factory';
 import { useStore } from '../store';
@@ -7,6 +7,7 @@ import AvatarConnectLogo from '../assets/avatarconnect.svg';
 import { BridgeResult } from '@avatarconnect/sdk';
 import AvatarPreview from './AvatarPreview';
 import { AvatarErrorBoundary } from './AvatarErrorBoundary';
+import { sourceMapping } from '../utils/sourceMapping';
 
 const AvatarConnect: FC = () => {
   const [store] = useStore();
@@ -24,13 +25,17 @@ const AvatarConnect: FC = () => {
     store.avatarConnect.bridge.on('result', (result: BridgeResult) => {
       handleBridgeResult(result);
     });
+
+    return () => {
+      store.avatarConnect.bridge.disable();
+    };
   }, [store.avatarConnect.bridge]);
 
   const handleBridgeResult = (result: BridgeResult) => {
     // replace Pinata gateway with Cloudflare as gateway has rate limits and CORS problems
     const replacedUrl = result.avatar.uri.replace(
       'https://gateway.pinata.cloud/ipfs/',
-      process.env.REACT_APP_IPFS_GATEWAY!
+      process.env.REACT_APP_IPFS_GATEWAY || 'https://nftstorage.link/ipfs/'
     );
     result.avatar.uri = replacedUrl;
     setBridgeResult(result);
@@ -76,41 +81,34 @@ const AvatarConnect: FC = () => {
 
   return (
     <>
-      <img src={AvatarConnectLogo} alt="AvatarConnect Logo" width="100"></img>
+      <img src={AvatarConnectLogo} alt="AvatarConnect Logo" className="w-40"></img>
       {bridgeResult ? (
         <>
-          <Row>
-            <Col xs={6}>
-              <Card style={{ marginTop: 20, marginBottom: 20 }}>
-                <Card.Body>
-                  <AvatarErrorBoundary>
-                    <AvatarPreview avatarUri={bridgeResult.avatar.uri} />
-                  </AvatarErrorBoundary>
-                  <Card.Title>{bridgeResult.avatar.uri}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">{bridgeResult.provider}</Card.Subtitle>
-                  <Card.Subtitle className="mb-2 text-muted">Avatar</Card.Subtitle>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              {error ? (
-                <h4 style={{ color: 'red' }}>Encountered an error {error}</h4>
-              ) : (
-                <Button onClick={uploadToBackpack} disabled={uploading}>
-                  {uploading ? 'Uploading...' : 'Upload'}
-                </Button>
-              )}
-            </Col>
-          </Row>
+          <div className="p-4 w-full max-w-lg bg-white rounded-lg border shadow-md sm:p-6 mt-6 mb-6">
+            <AvatarErrorBoundary>
+              <AvatarPreview avatarUri={bridgeResult.avatar.uri} />
+            </AvatarErrorBoundary>
+            <h5 className="mt-5 mb-3 text-base font-semibold text-gray-900 md:text-xl">
+              {sourceMapping[bridgeResult.provider]}
+            </h5>
+            <span className="text-base text-gray-600 font-semibold break-words">
+              {bridgeResult.avatar.uri}
+            </span>
+          </div>
+          <div>
+            {error ? (
+              <h4 style={{ color: 'red' }}>Encountered an error {error}</h4>
+            ) : (
+              <Button onClick={uploadToBackpack} disabled={uploading}>
+                {uploading ? 'Uploading...' : 'Upload'}
+              </Button>
+            )}
+          </div>
         </>
       ) : (
-        <Row>
-          <Col xs={6}>
-            <h3>Follow the steps in AvatarConnect</h3>
-          </Col>
-        </Row>
+        <h5 className="mt-5 mb-3 text-base font-semibold text-gray-900 md:text-xl">
+          Follow the steps in AvatarConnect
+        </h5>
       )}
     </>
   );

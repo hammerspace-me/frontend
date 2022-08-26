@@ -1,19 +1,28 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Api } from './api';
 
-export const useApi = (accessToken?: string, errorHandler?: (message: string) => void) => {
+export const useApi = (
+  accessToken?: string,
+  errorHandler?: (message: string) => void,
+  unauthorizedHandler?: (message: string) => void
+) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const errorNotification = (message: string) => {
     console.log('Error notification', message);
   };
 
   const noAuthRedirection = (url: string) => {
-    console.log(`Unauthorized on api call ${url} from page (${window.location.href})`);
+    console.log('Unauthorized API call, redirecting to login');
+    navigate('/login', { state: { from: location }, replace: true });
   };
 
   return {
     api: new Api(
-      process.env.REACT_APP_BACKPACK_BACKEND!,
+      process.env.REACT_APP_BACKPACK_BACKEND || 'http://localhost:3000',
       errorHandler || errorNotification,
-      noAuthRedirection,
+      unauthorizedHandler || noAuthRedirection,
       accessToken
     )
   };

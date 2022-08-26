@@ -1,14 +1,7 @@
 import { FC } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
 import CustomCard from './CustomCard';
 import TechnologyProviderCard from './TechnologyProviderCard';
 import { TechnologyProvider } from './TechnologyProviderModal';
-
-const styles = {
-  row: {
-    marginBottom: '50px'
-  }
-};
 
 interface TechnologyProviderListProps {
   providers: [TechnologyProvider];
@@ -18,22 +11,19 @@ const TechnologyProviderList: FC<TechnologyProviderListProps> = (
   props: TechnologyProviderListProps
 ) => {
   return (
-    <Container fluid>
-      <Row xs={2} style={styles.row}>
-        {props.providers.map((provider) => {
-          return (
-            <Col key={provider.title}>
-              <TechnologyProviderCard
-                description={provider.description}
-                image={provider.image}
-                title={provider.title}
-                onClick={provider.onClick}></TechnologyProviderCard>
-            </Col>
-          );
-        })}
-        <CustomCard></CustomCard>
-      </Row>
-    </Container>
+    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 m-4">
+      {props.providers.map((provider) => {
+        return (
+          <TechnologyProviderCard
+            description={provider.description}
+            image={provider.image}
+            title={provider.title}
+            key={provider.title}
+            onClick={provider.onClick}></TechnologyProviderCard>
+        );
+      })}
+      <CustomCard />
+    </div>
   );
 };
 

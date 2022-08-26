@@ -1,12 +1,11 @@
 import { FC } from 'react';
-import { Button, Container, Navbar } from 'react-bootstrap';
-import Logo from '../assets/logo.png';
+import Button from './Button';
 import Cookies from 'universal-cookie';
 import { useStore } from '../store';
 import { useNavigate } from 'react-router-dom';
 
 const Header: FC = () => {
-  const [store, setStore] = useStore();
+  const [, setStore] = useStore();
   const navigate = useNavigate();
 
   const logout = () => {
@@ -20,7 +19,29 @@ const Header: FC = () => {
     cookies.remove('user_address');
   };
 
+  const navigateHome = () => {
+    navigate('/');
+  };
+
   return (
+    <header className="container mx-auto p-4">
+      <nav className="bg-white border-gray-200 py-2.5">
+        <div className="flex flex-wrap justify-between items-center mx-auto">
+          <button
+            onClick={navigateHome}
+            className="self-center text-2xl font-semibold whitespace-nowrap">
+            BKPK.io
+          </button>
+          <Button onClick={logout}>Logout</Button>
+        </div>
+      </nav>
+    </header>
+  );
+};
+
+export default Header;
+
+/*
     <Navbar>
       <Container>
         <Navbar.Brand onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
@@ -28,8 +49,4 @@ const Header: FC = () => {
         </Navbar.Brand>
         {store.accessToken ? <Button onClick={logout}>Logout</Button> : null}
       </Container>
-    </Navbar>
-  );
-};
-
-export default Header;
+    </Navbar>*/

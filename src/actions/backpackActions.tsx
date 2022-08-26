@@ -1,9 +1,12 @@
 import { useStore } from '../store';
 import { useApi } from './api-factory';
 
-export const useBackpackActions = (errorHandler?: (message: string) => void) => {
+export const useBackpackActions = (
+  errorHandler?: (message: string) => void,
+  unauthorizedHandler?: (message: string) => void
+) => {
   const [store, setStore] = useStore();
-  const { api } = useApi(store.accessToken, errorHandler);
+  const { api } = useApi(store.accessToken, errorHandler, unauthorizedHandler);
 
   const getBackpack = async () => {
     try {

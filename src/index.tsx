@@ -1,8 +1,7 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import App from './containers/App';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 
 const container = document.getElementById('root');
 if (container) {
