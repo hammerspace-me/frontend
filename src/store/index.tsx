@@ -41,6 +41,7 @@ export interface IBackpackItem {
   category: string;
   content: string;
   source: string;
+  metadata: any;
 }
 
 export interface IAvatarConnect {

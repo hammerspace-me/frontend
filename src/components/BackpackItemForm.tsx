@@ -11,6 +11,7 @@ type FormData = {
   content: string;
   category: string;
   source: string;
+  metadata: any;
 };
 
 const BackpackItemForm: FC = () => {
@@ -29,7 +30,8 @@ const BackpackItemForm: FC = () => {
       id: backpackItem?.id,
       content: backpackItem?.content,
       source: backpackItem?.source,
-      category: backpackItem?.category
+      category: backpackItem?.category,
+      metadata: backpackItem?.metadata
     }
   });
 
@@ -115,6 +117,13 @@ const BackpackItemForm: FC = () => {
             type="text"
             className="mt-1 focus:ring-black focus:border-black block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
             {...register('source', { required: true })}></input>
+          <p className="mt-2 text-sm text-red-500">
+            {errors.source?.type === 'required' && errorMessages.required}
+          </p>
+        </div>
+        <div className="col-span-6 sm:col-span-6">
+          <label className="block text-sm font-medium text-gray-700">Metadata</label>
+          <p className="bg-gray">{JSON.stringify(backpackItem?.metadata)}</p>
           <p className="mt-2 text-sm text-red-500">
             {errors.source?.type === 'required' && errorMessages.required}
           </p>

@@ -52,13 +52,18 @@ const AvatarConnect: FC = () => {
     setUploading(true);
     if (bridgeResult) {
       const base64 = await getBase64FromUrl(bridgeResult.avatar.uri);
+
       const data = {
         file: base64,
         filename: extractFilename(bridgeResult.avatar.uri),
         fileExtension: bridgeResult.avatar.format,
         source: 'avatar-connect-' + bridgeResult.provider,
         category: 'avatar',
-        metadata: bridgeResult.metadata
+        metadata: {
+          format: bridgeResult.avatar.format,
+          type: bridgeResult.avatar.type,
+          ...(bridgeResult.metadata as Record<string, unknown>)
+        }
       };
       await api.post('/backpack/item/file', data);
       navigate('/');
