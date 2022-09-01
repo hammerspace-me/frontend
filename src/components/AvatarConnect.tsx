@@ -8,6 +8,7 @@ import { BridgeResult } from '@avatarconnect/sdk';
 import AvatarPreview from './AvatarPreview';
 import { AvatarErrorBoundary } from './AvatarErrorBoundary';
 import { sourceMapping } from '../utils/sourceMapping';
+import { mapBridgeResultToAvatarMetadata } from '../utils/avatarService';
 
 const AvatarConnect: FC = () => {
   const [store] = useStore();
@@ -59,8 +60,9 @@ const AvatarConnect: FC = () => {
         fileExtension: bridgeResult.avatar.format,
         source: 'avatar-connect-' + bridgeResult.provider,
         category: 'avatar',
-        metadata: bridgeResult.avatar
+        metadata: await mapBridgeResultToAvatarMetadata(bridgeResult)
       };
+
       await api.post('/backpack/item/file', data);
       navigate('/');
     }
