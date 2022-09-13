@@ -44,7 +44,7 @@ const GLTFAvatar: FC<AvatarPreviewProps> = (props: AvatarPreviewProps) => {
       }}
       style={canvasStyle}
       className={canvasClassName}>
-      <ambientLight intensity={1} />
+      <ambientLight intensity={2} />
       <Suspense fallback={null}>
         <primitive object={gltf.scene} />
       </Suspense>
@@ -84,7 +84,7 @@ const VRMAvatar: FC<AvatarPreviewProps> = (props: AvatarPreviewProps) => {
 
   return (
     <Canvas style={canvasStyle} className={canvasClassName} camera={camera}>
-      <ambientLight intensity={1} />
+      <ambientLight intensity={4} />
       <Suspense fallback={null}>
         <primitive object={gltf.scene} rotation={[0, 110, 0]} />
       </Suspense>
