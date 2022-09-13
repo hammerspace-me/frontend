@@ -4,7 +4,7 @@ import TechnologyProviderCard from './TechnologyProviderCard';
 import { TechnologyProvider } from './TechnologyProviderModal';
 
 interface TechnologyProviderListProps {
-  providers: [TechnologyProvider];
+  providers: TechnologyProvider[];
 }
 
 const TechnologyProviderList: FC<TechnologyProviderListProps> = (

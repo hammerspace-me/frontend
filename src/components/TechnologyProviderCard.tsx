@@ -39,7 +39,7 @@ const TechnologyProviderCard: FC<TechnologyProviderCardProps> = (
         </svg>
         <span className="ml-1">Avatars</span>
       </span>
-      <img className="w-full mt-4" alt="logo" src={props.image}></img>
+      <img className="w-60 max-h-24 mt-4" alt="logo" src={props.image}></img>
       <h5 className="mt-5 mb-3 text-base font-semibold text-gray-900 md:text-xl">{props.title}</h5>
       <span className="text-base text-gray-600 font-semibold break-words">{props.description}</span>
     </div>
