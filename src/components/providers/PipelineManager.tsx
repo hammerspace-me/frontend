@@ -34,11 +34,7 @@ const PipelineManager: FC<PipelineManagerProps> = (props: PipelineManagerProps) 
 
     let resultAggregate = result;
 
-    if (
-      currentStage.type === 'web3' ||
-      currentStage.type === 'select' ||
-      currentStage.type === 'result'
-    ) {
+    if (currentStage.type === 'web3' || currentStage.type === 'select') {
       if (currentStage.format) {
         resultAggregate = currentStage.format.call(context, result);
       }
@@ -110,7 +106,7 @@ const PipelineManager: FC<PipelineManagerProps> = (props: PipelineManagerProps) 
     return <ResultStage context={context} />;
   }
 
-  return <>Something wrong</>;
+  return <>Unexpected stage</>;
 };
 
 export default PipelineManager;
