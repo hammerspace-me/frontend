@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { PipelineStage } from '@bkpk/providers/dist/provider/pipeline';
 import { IframeResponse } from '@bkpk/providers/dist/provider/pipeline/iframe';
 import { getBaseUrl } from '../../../utils/baseUrl';
@@ -14,6 +14,8 @@ interface IFrameStageProps {
 }
 
 const IFrameStage: FC<IFrameStageProps> = (props: IFrameStageProps) => {
+  const [result, setResult] = useState<any>();
+
   useEffect(() => {
     window.addEventListener('message', receiveMessage, false);
     return () => {
@@ -21,15 +23,23 @@ const IFrameStage: FC<IFrameStageProps> = (props: IFrameStageProps) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (result) {
+      props.resultCallback(result);
+    }
+  }, [result]);
+
   const receiveMessage = async (event: any) => {
     const baseUrl = getBaseUrl(props.url);
     if (event.origin !== baseUrl || !event.data) return;
     if (props.context.stage.type === 'iframe') {
-      const result: IframeResponse = await props.context.stage.messageHandler.call(
+      const iFrameResult: IframeResponse = await props.context.stage.messageHandler.call(
         props.context,
         event.data
       );
-      props.resultCallback(result);
+      if (!result) {
+        setResult(iFrameResult);
+      }
     }
   };
 
