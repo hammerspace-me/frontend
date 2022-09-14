@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useBackpackActions } from '../actions/backpackActions';
 import Button from './Button';
+import { AvatarErrorBoundary } from './AvatarErrorBoundary';
+import AvatarPreview from './AvatarPreview';
 
 type FormData = {
   id: string;
@@ -17,7 +19,7 @@ type FormData = {
 const BackpackItemForm: FC = () => {
   const [store] = useStore();
   const { id } = useParams<'id'>();
-  const { getBackpack, deleteBackpackItem } = useBackpackActions();
+  const { deleteBackpackItem } = useBackpackActions();
 
   const backpackItem = store.backpack?.backpackItems.find((item) => item.id === id);
 
@@ -43,18 +45,15 @@ const BackpackItemForm: FC = () => {
 
     if (mode === 'create') {
       await api.post('/backpack/item', data);
-      await getBackpack();
       navigate('/');
     } else {
       await api.post('/backpack/item/' + data.id, data);
-      await getBackpack();
       navigate('/');
     }
   };
 
   const onDelete = async (id: string) => {
     await deleteBackpackItem(id);
-    getBackpack();
     navigate('/');
   };
 
@@ -63,9 +62,21 @@ const BackpackItemForm: FC = () => {
     required: 'Do not leave empty.'
   };
 
+  const avatarUri = () => {
+    if (backpackItem && backpackItem.content) {
+      return process.env.REACT_APP_IPFS_GATEWAY + backpackItem.content;
+    }
+    return '';
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-6 gap-6">
+        <div className="col-span-6">
+          <AvatarErrorBoundary>
+            <AvatarPreview avatarUri={avatarUri()} />
+          </AvatarErrorBoundary>
+        </div>
         <div className="col-span-6">
           <label className="block text-sm font-medium text-gray-700">Backpack address</label>
           <input
@@ -129,11 +140,15 @@ const BackpackItemForm: FC = () => {
           </p>
         </div>
         <Button>Save</Button>
-        <Button onClick={() => navigate('/')} className="bg-gray-400">
+        <Button
+          onClick={(event: React.MouseEvent<HTMLButtonElement>) => navigate('/')}
+          backgroundColor="bg-gray-400">
           Cancel
         </Button>
         {id ? (
-          <Button className="bg-red-600" onClick={() => onDelete(id)}>
+          <Button
+            backgroundColor="bg-red-600"
+            onClick={(event: React.MouseEvent<HTMLButtonElement>) => onDelete(id)}>
             Delete
           </Button>
         ) : (
