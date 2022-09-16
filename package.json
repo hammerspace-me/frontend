@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@avatarconnect/sdk": "^0.0.4",
+    "@metaverse-backpack/backpack-providers": "^0.0.2",
     "@pixiv/three-vrm": "^0.6.11",
     "@pixiv/types-vrm-0.0": "^1.0.0-beta.14",
     "@pixiv/types-vrmc-vrm-1.0": "^1.0.0-beta.14",
