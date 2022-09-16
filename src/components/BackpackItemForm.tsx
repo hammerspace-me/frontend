@@ -40,9 +40,9 @@ const BackpackItemForm: FC = () => {
   const { api } = useApi(store.accessToken);
   const navigate = useNavigate();
 
-  const onSubmit = async (data: IBackpackItem) => {
-    const mode = id == null ? 'create' : 'edit';
+  const mode = id == null ? 'create' : 'edit';
 
+  const onSubmit = async (data: IBackpackItem) => {
     if (mode === 'create') {
       await api.post('/backpack/item', data);
       navigate('/');
@@ -72,11 +72,13 @@ const BackpackItemForm: FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-6 gap-6">
-        <div className="col-span-6">
-          <AvatarErrorBoundary>
-            <AvatarPreview avatarUri={avatarUri()} />
-          </AvatarErrorBoundary>
-        </div>
+        {mode === 'edit' ? (
+          <div className="col-span-6">
+            <AvatarErrorBoundary>
+              <AvatarPreview avatarUri={avatarUri()} />
+            </AvatarErrorBoundary>
+          </div>
+        ) : null}
         <div className="col-span-6">
           <label className="block text-sm font-medium text-gray-700">Backpack address</label>
           <input
@@ -115,8 +117,6 @@ const BackpackItemForm: FC = () => {
               required: true
             })}>
             <option value="avatar">Avatar</option>
-            <option value="identity">Identity</option>
-            <option value="misc">Misc</option>
           </select>
           <p className="mt-2 text-sm text-red-500">
             {errors.category?.type === 'required' && errorMessages.required}
