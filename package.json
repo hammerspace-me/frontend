@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@metaverse-backpack/backpack-providers": "^0.0.2",
+    "@metaverse-backpack/backpack-providers": "^0.0.4",
     "@pixiv/three-vrm": "^0.6.11",
     "@react-three/fiber": "^8.7.4",
     "@types/jest": "^27.4.1",
