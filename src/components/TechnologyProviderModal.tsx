@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { useModalActions } from '../actions/modalActions';
 import { useStore } from '../store';
 import TechnologyProviderList from './TechnologyProviderList';
-import AvatarConnectLogo from '../assets/avatarconnect.svg';
 import { useNavigate } from 'react-router-dom';
+import providers from '@metaverse-backpack/backpack-providers';
 
 export interface TechnologyProvider {
   image: string;
@@ -17,15 +17,30 @@ const TechnologyProviderModal: FC = () => {
   const { hideTechnologyProviderModal } = useModalActions();
   const navigate = useNavigate();
 
-  const providers: [TechnologyProvider] = [
+  const technologyProviders: TechnologyProvider[] = [
     {
-      title: 'AvatarConnect',
-      description:
-        'AvatarConnect allows you to add your Ready Player Me, Meebits or CryptoAvatars avatar to Backpack.',
+      title: providers['ready-player-me'].title,
+      description: providers['ready-player-me'].description,
       onClick: () => {
-        navigate('/avatarconnect');
+        navigate('/readyplayerme');
       },
-      image: AvatarConnectLogo
+      image: providers['ready-player-me'].icon.toString()
+    },
+    {
+      title: providers['crypto-avatars'].title,
+      description: providers['crypto-avatars'].description,
+      onClick: () => {
+        navigate('/cryptoavatars');
+      },
+      image: providers['crypto-avatars'].icon.toString()
+    },
+    {
+      title: providers['meebits'].title,
+      description: providers['meebits'].description,
+      onClick: () => {
+        navigate('/meebits');
+      },
+      image: providers['meebits'].icon.toString()
     }
   ];
 
@@ -39,7 +54,7 @@ const TechnologyProviderModal: FC = () => {
         hiddenClass
       }>
       <div className="flex justify-center items-center mx-auto p-4 w-full max-w-4xl h-full">
-        <div className="relative bg-white rounded-lg shadow-lg">
+        <div className="relative bg-white rounded-lg shadow-lg pb-8">
           <button
             type="button"
             className="absolute top-3 right-2.5 text-white bg-black rounded-lg text-sm p-1.5 ml-auto inline-flex items-center tracking-wider outline-none transition-all sm:text-sm hover:-translate-y-0.5 hover:shadow-large focus:-translate-y-0.5 focus:shadow-large focus:outline-none"
@@ -65,7 +80,7 @@ const TechnologyProviderModal: FC = () => {
               your Backpack.
             </p>
           </div>
-          <TechnologyProviderList providers={providers} />
+          <TechnologyProviderList providers={technologyProviders} />
         </div>
       </div>
     </div>

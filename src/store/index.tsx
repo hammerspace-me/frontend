@@ -1,30 +1,9 @@
 import storeFactory from './store-factory';
 import Cookies from 'universal-cookie';
-import AvatarConnect, { BridgeResult } from '@avatarconnect/sdk';
 
 const cookies = new Cookies();
 const accessToken = cookies.get('access_token');
 const userAddress = cookies.get('user_address');
-
-const avatarConnectBridge = new AvatarConnect(
-  [
-    // @ts-expect-error: AvatarConnect expects weird type
-    ['ready-player-me', { gateway: process.env.REACT_APP_AC_RPM_GATEWAY }],
-    [
-      // @ts-expect-error: AvatarConnect expects weird type
-      'crypto-avatars',
-      {
-        // @ts-expect-error: AvatarConnect expects weird type
-        apiKey: process.env.REACT_APP_AC_CA_API_KEY,
-        // @ts-expect-error: AvatarConnect expects weird type
-        address: process.env.REACT_APP_AC_CA_ADDRESS
-      }
-    ],
-    // @ts-expect-error: AvatarConnect expects weird type
-    'meebits'
-  ],
-  { maxHeight: 610 }
-);
 
 export interface IApi {
   reading: boolean;
@@ -44,12 +23,6 @@ export interface IBackpackItem {
   metadata: any;
 }
 
-export interface IAvatarConnect {
-  bridge: AvatarConnect;
-  open: boolean;
-  latestResult?: BridgeResult;
-}
-
 export interface IStore {
   accessToken?: string;
   userAddress?: string;
@@ -57,7 +30,6 @@ export interface IStore {
   technologyProviderModal: boolean;
   api: IApi;
   toggleListGrid: boolean;
-  avatarConnect: IAvatarConnect;
 }
 
 const storeDefault: IStore = {
@@ -69,12 +41,7 @@ const storeDefault: IStore = {
   },
   backpack: undefined,
   technologyProviderModal: false,
-  toggleListGrid: false,
-  avatarConnect: {
-    bridge: avatarConnectBridge,
-    open: false,
-    latestResult: undefined
-  }
+  toggleListGrid: false
 };
 
 const { Provider: StoreProvider, useStore } = storeFactory<IStore>();

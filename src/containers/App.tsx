@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import CloseWindow from '../components/providers/CloseWindow';
 import { useStore } from '../store';
 import { StoreProvider, storeDefault } from '../store';
 import Backpack from './Backpack';
@@ -37,6 +38,7 @@ const App: FC = () => {
             <Route path="activate" element={<OAuthActivation />} />
             <Route path="*" />
           </Route>
+          <Route path="/callback" element={<CloseWindow />} />
         </Routes>
       </BrowserRouter>
     </StoreProvider>
