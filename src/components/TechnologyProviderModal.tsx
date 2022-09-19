@@ -3,7 +3,7 @@ import { useModalActions } from '../actions/modalActions';
 import { useStore } from '../store';
 import TechnologyProviderList from './TechnologyProviderList';
 import { useNavigate } from 'react-router-dom';
-import providers from '@bkpk/providers';
+import providers from '@metaverse-backpack/backpack-providers';
 
 export interface TechnologyProvider {
   image: string;

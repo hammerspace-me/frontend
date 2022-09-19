@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-import { PipelineResponse, PipelineStage } from '@bkpk/providers/dist/provider/pipeline';
 import { AvatarErrorBoundary } from '../../AvatarErrorBoundary';
 import AvatarPreview from '../../AvatarPreview';
 import { sourceMapping } from '../../../utils/sourceMapping';
@@ -7,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { useApi } from '../../../actions/api-factory';
 import { useStore } from '../../../store';
 import Button from '../../Button';
+import {
+  PipelineResponse,
+  PipelineStage
+} from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
 
 interface ResultStageProps {
   context: {

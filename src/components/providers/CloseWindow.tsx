@@ -1,9 +1,6 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 
 const CloseWindow: FC = () => {
-  useEffect(() => {
-    //window.close();
-  });
   return <>You can close the window now.</>;
 };
 

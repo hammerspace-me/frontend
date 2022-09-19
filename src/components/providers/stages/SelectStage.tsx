@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { PipelineStage } from '@bkpk/providers/dist/provider/pipeline';
-import { SelectResponse } from '@bkpk/providers/dist/provider/pipeline/select';
 import SelectStageEmptyCard from './SelectStageEmptyCard';
 import SelectStageCard from './SelectStageCard';
+import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
+import { SelectResponse } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline/select';
 
 interface SelectStageProps {
   context: {
@@ -20,7 +20,7 @@ const SelectStage: FC<SelectStageProps> = (props: SelectStageProps) => {
 
   if (props.context.aggregate.length === 0) {
     return (
-      <div className="w-full grid gap-4 grid-cols-4">
+      <div className="w-full">
         <SelectStageEmptyCard />
       </div>
     );

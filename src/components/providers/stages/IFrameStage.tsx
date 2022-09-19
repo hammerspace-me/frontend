@@ -1,6 +1,6 @@
+import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
+import { IframeResponse } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline/iframe';
 import { FC, useEffect, useState } from 'react';
-import { PipelineStage } from '@bkpk/providers/dist/provider/pipeline';
-import { IframeResponse } from '@bkpk/providers/dist/provider/pipeline/iframe';
 import { getBaseUrl } from '../../../utils/baseUrl';
 
 interface IFrameStageProps {
@@ -47,6 +47,7 @@ const IFrameStage: FC<IFrameStageProps> = (props: IFrameStageProps) => {
     <div className="w-full h-full">
       <iframe
         src={props.url}
+        title="iframe-stage"
         allow="camera *; microphone *"
         className="w-full h-[800px] rounded-lg"></iframe>
     </div>

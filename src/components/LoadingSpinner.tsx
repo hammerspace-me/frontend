@@ -1,30 +1,10 @@
-import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
-import { TransformResponse } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline/transform';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 
-interface TransformStageProps {
-  context: {
-    aggregate: any;
-    provider: any;
-    stage: PipelineStage;
-  };
-  resultCallback: (result: TransformResponse) => void;
+interface LoadingSpinnerProps {
+  text?: string;
 }
 
-const TransformStage: FC<TransformStageProps> = (props: TransformStageProps) => {
-  useEffect(() => {
-    const transform = async () => {
-      if (props.context.stage.type === 'transform') {
-        const result: TransformResponse = await props.context.stage.transform.call(
-          props.context,
-          null
-        );
-        props.resultCallback(result);
-      }
-    };
-    transform().catch(console.error);
-  }, []);
-
+const LoadingSpinner: FC = (props: LoadingSpinnerProps) => {
   return (
     <div className="w-full flex items-center flex-col">
       <svg
@@ -42,8 +22,11 @@ const TransformStage: FC<TransformStageProps> = (props: TransformStageProps) => 
           fill="currentFill"
         />
       </svg>
+      {props.text && (
+        <h5 className="mt-5 mb-3 text-base font-semibold text-gray-600 md:text-xl">{props.text}</h5>
+      )}
     </div>
   );
 };
 
-export default TransformStage;
+export default LoadingSpinner;

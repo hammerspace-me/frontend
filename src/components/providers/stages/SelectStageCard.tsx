@@ -1,4 +1,4 @@
-import { SelectResponse } from '@bkpk/providers/dist/provider/pipeline/select';
+import { SelectResponse } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline/select';
 import { FC } from 'react';
 
 interface SelectStageCardProps {
@@ -17,7 +17,7 @@ const SelectStageCard: FC<SelectStageCardProps> = (props: SelectStageCardProps) 
     <div
       onClick={props.onClick}
       className="w-full bg-white border shadow-md p-6 transition-all sm:text-sm hover:-translate-y-0.5 hover:shadow-large focus:-translate-y-0.5 focus:shadow-large focus:outline-none rounded-md hover:cursor-pointer">
-      <img className="mt-4" alt="avatar-image" src={imageUrl}></img>
+      <img className="mt-4" alt="avatar" src={imageUrl}></img>
       <h5 className="mt-5 mb-3 text-base font-semibold text-gray-900 md:text-xl">{title}</h5>
     </div>
   );

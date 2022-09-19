@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { PipelineStage } from '@bkpk/providers/dist/provider/pipeline';
 import { ethers } from 'ethers';
 import { useStore } from '../../../store';
 import { MetaMaskLogo } from '../../../assets/metamaskLogo';
+import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
 
 interface Web3StageProps {
   context: {
@@ -33,8 +33,8 @@ const Web3Stage: FC<Web3StageProps> = (props: Web3StageProps) => {
   };
 
   const handleBackpackAddress = async () => {
-    const testAddress = '0xfF6ddb157773197c31a834F6A294c7D0c0abc79F';
-    props.resultCallback([testAddress]);
+    const address = process.env.REACT_APP_CA_ADDRESS || store.userAddress;
+    props.resultCallback([address]);
   };
 
   return (
