@@ -17,8 +17,11 @@ const OAuthStage: FC<OAuthStageProps> = (props: OAuthStageProps) => {
   const [error, setError] = useState<string>();
 
   const popup = new Popup<any>({
-    url: 'https://meebits.larvalabs.com/meebits/apiAccessRequest?callbackUrl=http://localhost:3001/callback',
-    redirectUri: 'http://localhost:3001/callback',
+    url:
+      process.env.REACT_APP_MEEBITS_OAUTH_URL +
+      '?callbackUrl=' +
+      process.env.REACT_APP_MEEBITS_REDIRECT_URI,
+    redirectUri: process.env.REACT_APP_MEEBITS_REDIRECT_URI || 'http://localhost:3001/callback',
     width: 1200,
     height: 1000,
     callback: (result: any) => {
