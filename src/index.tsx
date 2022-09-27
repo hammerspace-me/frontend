@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import App from './containers/App';
 import './index.css';
+import isDev from './utils/isDev';
 
 const container = document.getElementById('root');
 if (container) {
@@ -9,7 +10,7 @@ if (container) {
   root.render(<App />);
 }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(console.log);
+// We only want to log performance results in dev
+if (isDev()) {
+  reportWebVitals(console.log);
+}
