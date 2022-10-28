@@ -80,7 +80,7 @@ const BackpackItemForm: FC = () => {
           </div>
         ) : null}
         <div className="col-span-6">
-          <label className="block text-sm font-medium text-gray-700">Backpack address</label>
+          <label className="block text-sm font-medium text-gray-700">HAMMERSPACE address</label>
           <input
             type="text"
             name="backpackAddress"
@@ -88,7 +88,7 @@ const BackpackItemForm: FC = () => {
             disabled
             className="mt-1 focus:ring-black focus:border-black block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
             value={store.backpack?.id}></input>
-          <p className="mt-2 text-sm text-gray-500">Backpack address is automatically added.</p>
+          <p className="mt-2 text-sm text-gray-500">HAMMERSPACE address is automatically added.</p>
         </div>
         <div className="col-span-6 sm:col-span-6">
           <label className="block text-sm font-medium text-gray-700">Content (CID)</label>

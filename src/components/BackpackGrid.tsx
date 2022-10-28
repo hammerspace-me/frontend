@@ -69,7 +69,7 @@ const BackpackGrid: FC = () => {
             strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
           </svg>
-          Add Backpack item
+          Add item
         </Button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">

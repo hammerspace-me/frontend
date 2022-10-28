@@ -125,7 +125,7 @@ const OAuth: FC = () => {
           src={authorizationResponse?.application.logo}
           alt="logo"></img>
         <h5 className="mb-3 text-base font-semibold text-gray-900 md:text-xl">
-          {authorizationResponse?.application.name} wants to access your Backpack
+          {authorizationResponse?.application.name} wants to access your HAMMERSPACE
         </h5>
 
         <p className="text-sm font-normal text-gray-500">
