@@ -81,7 +81,7 @@ const Login: FC = () => {
           Login using your wallet
         </h5>
         <p className="text-sm font-normal text-gray-500">
-          Connect with one of our available wallet providers to login to Backpack.
+          Connect with one of our available wallet providers to login to HAMMERSPACE.
         </p>
         <ul className="my-4 space-y-3">
           <li>

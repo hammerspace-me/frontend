@@ -30,7 +30,7 @@ const Header: FC = () => {
           <button
             onClick={navigateHome}
             className="self-center text-2xl font-semibold whitespace-nowrap">
-            BKPK.io
+            HAMMERSPACE
           </button>
           <Button onClick={logout}>Logout</Button>
         </div>

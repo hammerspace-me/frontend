@@ -29,7 +29,7 @@ const SelectStage: FC<SelectStageProps> = (props: SelectStageProps) => {
   return (
     <>
       <div className="mt-5 mb-3 font-semibold text-gray-900 text-xl">
-        Select the avatar you would like to add to your Backpack
+        Select the avatar you would like to add to your HAMMERSPACE
       </div>
       <div className="w-full grid gap-4 grid-cols-4">
         {props.context.aggregate.map((ag: any) => {

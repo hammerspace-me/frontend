@@ -31,11 +31,9 @@ const CustomCard: FC = () => {
         </svg>
         <span className="ml-1">Any</span>
       </span>
-      <h5 className="mt-5 mb-3 text-base font-semibold text-gray-900 md:text-xl">
-        Custom Backpack item
-      </h5>
+      <h5 className="mt-5 mb-3 text-base font-semibold text-gray-900 md:text-xl">Custom item</h5>
       <span className="text-base text-gray-600 font-semibold break-words">
-        Add a custom Backpack item of any kind to your Backpack.
+        Add a custom item of any kind to your HAMMERSPACE
       </span>
     </div>
   );
