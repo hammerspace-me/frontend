@@ -3,6 +3,7 @@ import { useModalActions } from '../actions/modalActions';
 import { useStore } from '../store';
 import TechnologyProviderList from './TechnologyProviderList';
 import { useNavigate } from 'react-router-dom';
+// TODO: Change to new package name
 import providers from '@metaverse-backpack/backpack-providers';
 
 export interface TechnologyProvider {
@@ -76,8 +77,8 @@ const TechnologyProviderModal: FC = () => {
           </div>
           <div className="p-6">
             <p className="text-sm font-normal text-gray-500">
-              Add a new backpack item by using one of our technology providers or add it manually to
-              your Backpack.
+              Add a new item by using one of our technology providers or add it manually to your
+              Hammerspace.
             </p>
           </div>
           <TechnologyProviderList providers={technologyProviders} />

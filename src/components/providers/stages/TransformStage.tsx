@@ -1,3 +1,4 @@
+// TODO: Change to new package name
 import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
 import { TransformResponse } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline/transform';
 import { FC, useEffect } from 'react';

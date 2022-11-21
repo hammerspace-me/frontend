@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useApi } from '../../../actions/api-factory';
 import { useStore } from '../../../store';
 import Button from '../../Button';
+// TODO: Change to new package name
 import {
   PipelineResponse,
   PipelineStage
@@ -51,7 +52,7 @@ const ResultStage: FC<ResultStageProps> = (props: ResultStageProps) => {
       metadata: item.metadata
     };
 
-    await api.post('/backpack/item/file', data);
+    await api.post('/space/item/file', data);
     navigate('/');
   };
 

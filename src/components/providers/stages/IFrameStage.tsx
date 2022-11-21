@@ -1,3 +1,4 @@
+// TODO: Change to new package name
 import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
 import { IframeResponse } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline/iframe';
 import { FC, useEffect, useState } from 'react';

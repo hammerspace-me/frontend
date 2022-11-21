@@ -12,7 +12,7 @@ const Header: FC = () => {
     setStore((old) => ({
       ...old,
       accessToken: undefined,
-      backpack: undefined
+      space: undefined
     }));
     const cookies = new Cookies();
     cookies.remove('access_token');

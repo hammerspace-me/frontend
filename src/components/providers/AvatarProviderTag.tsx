@@ -1,3 +1,4 @@
+// TODO: Change to new package name
 import providers from '@metaverse-backpack/backpack-providers';
 import { FC } from 'react';
 

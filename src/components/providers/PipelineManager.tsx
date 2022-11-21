@@ -5,6 +5,7 @@ import TransformStage from './stages/TransformStage';
 import Web3Stage from './stages/Web3Stage';
 import SelectStage from './stages/SelectStage';
 import OAuthStage from './stages/OAuthStage';
+// TODO: Change to new package name
 import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
 import providers from '@metaverse-backpack/backpack-providers';
 

@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-route
 import CloseWindow from '../components/providers/CloseWindow';
 import { useStore } from '../store';
 import { StoreProvider, storeDefault } from '../store';
-import Backpack from './Backpack';
+import Hammerspace from './Hammerspace';
 import Login from './Login';
 import OAuth from './OAuth';
 import OAuthActivation from './OAuthActivation';
@@ -28,7 +28,7 @@ const App: FC = () => {
             path="*"
             element={
               <RequireAuth>
-                <Backpack />
+                <Hammerspace />
               </RequireAuth>
             }
           />

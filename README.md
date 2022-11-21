@@ -1,34 +1,22 @@
-<div id="top"></div>
-<br />
-<div align="center">
-  <a href="https://github.com/Metaverse-Backpack/backpack-frontend">
-    <img src="images/logo.png" alt="Logo" width="200">
-  </a>
-
-<h3 align="center">Backpack Frontend</h3>
-  <p align="center">
-    Frontend for Metaverse Backpack - a virtual backpack for your Metaverse assets
-  </p>
-</div>
-
 ## About The Project
 
-The backpack frontend is a website that let's you manage your virtual backpack.
+A web application that provides a visual interface to manage a personal Hammerspace.
 
 ## Getting Started
 
 ### Prerequisites
 
-* npm
+- npm
 
-  Install npm as the service is based on React and uses npm as a package manager. *NOTE:* This installation command requires [brew](https://brew.sh/) and only runs on Mac.
+  Install npm as the service is based on React and uses npm as a package manager. _NOTE:_ This installation command requires [brew](https://brew.sh/) and only runs on Mac.
+
   ```sh
   $ brew install node
   ```
 
-* Backpack backend
+- Hammerspace backend
 
-  Please refer to the [backpack backend](https://github.com/Metaverse-Backpack/backpack-backend) and ensure that it is properly setup and running before you continue to run the backpack frontend.
+  Please refer to the [Hammerspace backend](https://github.com/hammerspace/backend) and ensure that it is properly setup and running before you continue to run the hammerspace frontend.
 
 ### Installation
 
@@ -45,7 +33,8 @@ The backpack frontend is a website that let's you manage your virtual backpack.
 
 ### Development
 
-For development, the backpack frontend can be started with the following command:
+For development, the frontend can be started with the following command:
+
 ```bash
 # Start frontend in watch mode (automatically reload if files change)
 $ npm run start
@@ -53,7 +42,8 @@ $ npm run start
 
 ### Production
 
-For production, the backpack frontend can be build with the following command:
+For production, the frontend can be build with the following command:
+
 ```bash
 # Build service in production mode
 $ npm run build
@@ -86,4 +76,4 @@ Tobias Petrasch - [@TPetrasch](https://twitter.com/TPetrasch) - tobias.petrasch@
 
 ## Acknowledgments
 
-* [Protocol Labs](https://www.protocol.ai)
+- [Protocol Labs](https://www.protocol.ai)
