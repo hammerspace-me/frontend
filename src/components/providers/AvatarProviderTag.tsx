@@ -1,5 +1,5 @@
 // TODO: Change to new package name
-import providers from '@metaverse-backpack/backpack-providers';
+import providers from '@hammerspace-me/technology-providers-sdk';
 import { FC } from 'react';
 
 interface AvatarProviderTagProps {

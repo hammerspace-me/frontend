@@ -34,7 +34,7 @@ export const useHammerspaceActions = (
         ...old,
         api: { ...old.api, writing: true }
       }));
-      await api.remove('space/item/' + id);
+      await api.remove('item/' + id);
       setStore((old) => ({
         ...old,
         api: { ...old.api, writing: false }

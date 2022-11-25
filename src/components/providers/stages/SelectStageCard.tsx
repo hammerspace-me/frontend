@@ -1,5 +1,4 @@
-// TODO: Change to new package name
-import { SelectResponse } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline/select';
+import { SelectResponse } from '@hammerspace-me/technology-providers-sdk/dist/provider/pipeline/select';
 import { FC } from 'react';
 
 interface SelectStageCardProps {

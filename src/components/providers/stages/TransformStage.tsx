@@ -1,6 +1,5 @@
-// TODO: Change to new package name
-import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
-import { TransformResponse } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline/transform';
+import { PipelineStage } from '@hammerspace-me/technology-providers-sdk/dist/provider/pipeline';
+import { TransformResponse } from '@hammerspace-me/technology-providers-sdk/dist/provider/pipeline/transform';
 import { FC, useEffect } from 'react';
 
 interface TransformStageProps {

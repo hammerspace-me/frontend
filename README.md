@@ -16,13 +16,13 @@ A web application that provides a visual interface to manage a personal Hammersp
 
 - Hammerspace backend
 
-  Please refer to the [Hammerspace backend](https://github.com/hammerspace/backend) and ensure that it is properly setup and running before you continue to run the hammerspace frontend.
+  Please refer to the [Hammerspace backend](https://github.com/hammerspace-me/backend) and ensure that it is properly setup and running before you continue to run the hammerspace frontend.
 
 ### Installation
 
 1. Clone the repo
    ```sh
-   $ git clone https://github.com/Metaverse-Backpack/backpack-frontend.git
+   $ git clone https://github.com/hammerspace-me/frontend.git
    ```
 2. Install NPM packages
    ```sh

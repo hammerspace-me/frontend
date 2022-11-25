@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import Popup from './Popup';
 import SelectStageEmptyCard from './SelectStageEmptyCard';
 import LoadingSpinner from '../../LoadingSpinner';
-import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
+import { PipelineStage } from '@hammerspace-me/technology-providers-sdk/dist/provider/pipeline';
 
 interface OAuthStageProps {
   context: {

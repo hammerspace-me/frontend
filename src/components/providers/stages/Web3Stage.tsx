@@ -2,8 +2,7 @@ import { FC } from 'react';
 import { ethers } from 'ethers';
 import { useStore } from '../../../store';
 import { MetaMaskLogo } from '../../../assets/metamaskLogo';
-// TODO: Change to new package name
-import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
+import { PipelineStage } from '@hammerspace-me/technology-providers-sdk/dist/provider/pipeline';
 
 interface Web3StageProps {
   context: {

@@ -44,10 +44,10 @@ const SpaceItemForm: FC = () => {
 
   const onSubmit = async (data: IItem) => {
     if (mode === 'create') {
-      await api.post('/space/item', data);
+      await api.post('item', data);
       navigate('/');
     } else {
-      await api.post('/space/item/' + data.id, data);
+      await api.post('item/' + data.id, data);
       navigate('/');
     }
   };

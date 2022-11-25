@@ -1,9 +1,8 @@
 import { FC } from 'react';
 import SelectStageEmptyCard from './SelectStageEmptyCard';
 import SelectStageCard from './SelectStageCard';
-// TODO: Change to new package name
-import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
-import { SelectResponse } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline/select';
+import { PipelineStage } from '@hammerspace-me/technology-providers-sdk/dist/provider/pipeline';
+import { SelectResponse } from '@hammerspace-me/technology-providers-sdk/dist/provider/pipeline/select';
 
 interface SelectStageProps {
   context: {

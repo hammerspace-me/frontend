@@ -6,11 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { useApi } from '../../../actions/api-factory';
 import { useStore } from '../../../store';
 import Button from '../../Button';
-// TODO: Change to new package name
 import {
   PipelineResponse,
   PipelineStage
-} from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
+} from '@hammerspace-me/technology-providers-sdk/dist/provider/pipeline';
 
 interface ResultStageProps {
   context: {
@@ -52,7 +51,7 @@ const ResultStage: FC<ResultStageProps> = (props: ResultStageProps) => {
       metadata: item.metadata
     };
 
-    await api.post('/space/item/file', data);
+    await api.post('item/file', data);
     navigate('/');
   };
 
