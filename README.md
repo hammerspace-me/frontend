@@ -1,6 +1,8 @@
+# hammerspace-me/frontend
+
 ## About The Project
 
-A web application that provides a visual interface to manage a personal Hammerspace.
+Hammerspace is a virtual space for all the assets that belong to you. It helps you move and express yourself in the Metaverse. Hammerspace's focus is to enable interoperability and seamlessness. This web application provides a visual interface to manage a personal Hammerspace. Feel free to visit the [project website](https://www.hammerspace.me) or our [E2E demo](https://demo.hammerspace.me).
 
 ## Getting Started
 
