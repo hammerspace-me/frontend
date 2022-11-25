@@ -10,12 +10,12 @@ export interface IApi {
   writing: boolean;
 }
 
-export interface IBackpack {
+export interface ISpace {
   id: string;
-  backpackItems: [IBackpackItem];
+  items: [IItem];
 }
 
-export interface IBackpackItem {
+export interface IItem {
   id: string;
   category: string;
   content: string;
@@ -26,7 +26,7 @@ export interface IBackpackItem {
 export interface IStore {
   accessToken?: string;
   userAddress?: string;
-  backpack?: IBackpack;
+  space?: ISpace;
   technologyProviderModal: boolean;
   api: IApi;
   toggleListGrid: boolean;
@@ -39,7 +39,7 @@ const storeDefault: IStore = {
     reading: false,
     writing: false
   },
-  backpack: undefined,
+  space: undefined,
   technologyProviderModal: false,
   toggleListGrid: false
 };

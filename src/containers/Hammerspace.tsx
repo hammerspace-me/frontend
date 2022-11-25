@@ -1,22 +1,22 @@
 import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import BackpackItemForm from '../components/BackpackItemForm';
-import BackpackGrid from '../components/BackpackGrid';
+import SpaceItemForm from '../components/SpaceItemForm';
+import SpaceGrid from '../components/SpaceGrid';
 import Header from '../components/Header';
 import TechnologyProviderModal from '../components/TechnologyProviderModal';
 import ReadyPlayerMe from '../components/providers/ReadyPlayerMe';
 import CryptoAvatars from '../components/providers/CryptoAvatars';
 import Meebits from '../components/providers/Meebits';
 
-const Backpack: FC = () => {
+const Hammerspace: FC = () => {
   return (
     <>
       <Header />
       <div className="container mx-auto px-4">
         <Routes>
-          <Route path="*" element={<BackpackGrid />} />
-          <Route path="/item/:id" element={<BackpackItemForm />} />
-          <Route path="/item" element={<BackpackItemForm />} />
+          <Route path="*" element={<SpaceGrid />} />
+          <Route path="/item/:id" element={<SpaceItemForm />} />
+          <Route path="/item" element={<SpaceItemForm />} />
           <Route path="/readyplayerme" element={<ReadyPlayerMe />} />
           <Route path="/cryptoavatars" element={<CryptoAvatars />} />
           <Route path="/meebits" element={<Meebits />} />
@@ -27,4 +27,4 @@ const Backpack: FC = () => {
   );
 };
 
-export default Backpack;
+export default Hammerspace;

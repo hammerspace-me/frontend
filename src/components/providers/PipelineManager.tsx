@@ -5,8 +5,8 @@ import TransformStage from './stages/TransformStage';
 import Web3Stage from './stages/Web3Stage';
 import SelectStage from './stages/SelectStage';
 import OAuthStage from './stages/OAuthStage';
-import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
-import providers from '@metaverse-backpack/backpack-providers';
+import { PipelineStage } from '@hammerspace-me/technology-providers-sdk/dist/provider/pipeline';
+import providers from '@hammerspace-me/technology-providers-sdk';
 
 interface PipelineManagerProps {
   provider: string;

@@ -12,7 +12,7 @@ const Header: FC = () => {
     setStore((old) => ({
       ...old,
       accessToken: undefined,
-      backpack: undefined
+      space: undefined
     }));
     const cookies = new Cookies();
     cookies.remove('access_token');
@@ -40,13 +40,3 @@ const Header: FC = () => {
 };
 
 export default Header;
-
-/*
-    <Navbar>
-      <Container>
-        <Navbar.Brand onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-          <img alt="Backpack" src={Logo} width="30" className="d-inline-block align-top" /> Backpack
-        </Navbar.Brand>
-        {store.accessToken ? <Button onClick={logout}>Logout</Button> : null}
-      </Container>
-    </Navbar>*/

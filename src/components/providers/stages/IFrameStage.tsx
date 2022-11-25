@@ -1,5 +1,5 @@
-import { PipelineStage } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline';
-import { IframeResponse } from '@metaverse-backpack/backpack-providers/dist/provider/pipeline/iframe';
+import { PipelineStage } from '@hammerspace-me/technology-providers-sdk/dist/provider/pipeline';
+import { IframeResponse } from '@hammerspace-me/technology-providers-sdk/dist/provider/pipeline/iframe';
 import { FC, useEffect, useState } from 'react';
 import { getBaseUrl } from '../../../utils/baseUrl';
 

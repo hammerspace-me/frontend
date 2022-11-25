@@ -3,7 +3,7 @@ import { useModalActions } from '../actions/modalActions';
 import { useStore } from '../store';
 import TechnologyProviderList from './TechnologyProviderList';
 import { useNavigate } from 'react-router-dom';
-import providers from '@metaverse-backpack/backpack-providers';
+import providers from '@hammerspace-me/technology-providers-sdk';
 
 export interface TechnologyProvider {
   image: string;
@@ -72,12 +72,12 @@ const TechnologyProviderModal: FC = () => {
             <span className="sr-only">Close modal</span>
           </button>
           <div className="py-4 px-6 rounded-t border-b">
-            <h3 className="text-base font-semibold text-gray-900 lg:text-xl">Add Backpack Item</h3>
+            <h3 className="text-base font-semibold text-gray-900 lg:text-xl">Add Item</h3>
           </div>
           <div className="p-6">
             <p className="text-sm font-normal text-gray-500">
-              Add a new backpack item by using one of our technology providers or add it manually to
-              your Backpack.
+              Add a new item by using one of our technology providers or add it manually to your
+              Hammerspace.
             </p>
           </div>
           <TechnologyProviderList providers={technologyProviders} />

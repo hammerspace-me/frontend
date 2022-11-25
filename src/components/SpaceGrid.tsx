@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { useStore } from '../store';
-import { useBackpackActions } from '../actions/backpackActions';
+import { useHammerspaceActions } from '../actions/hammerspaceActions';
 import { AvatarErrorBoundary } from './AvatarErrorBoundary';
 import AvatarPreview from './AvatarPreview';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,7 @@ import Button from './Button';
 import { useModalActions } from '../actions/modalActions';
 import { sourceMapping } from '../utils/sourceMapping';
 
-const BackpackGrid: FC = () => {
+const SpaceGrid: FC = () => {
   const [store] = useStore();
   const [error, setError] = useState<string>();
   const navigate = useNavigate();
@@ -18,14 +18,14 @@ const BackpackGrid: FC = () => {
     setError(message);
   };
 
-  const { getBackpack } = useBackpackActions(errorHandler);
+  const { getSpace } = useHammerspaceActions(errorHandler);
 
   const onCreate = async () => {
     showTechnologyProviderModal();
   };
 
   useEffect(() => {
-    getBackpack();
+    getSpace();
   }, []);
 
   const navigateEdit = (id: string) => {
@@ -40,15 +40,15 @@ const BackpackGrid: FC = () => {
     );
   }
 
-  if (!store.backpack) {
+  if (!store.space) {
     return (
       <h5 className="mt-5 mb-3 text-base font-semibold text-gray-900 md:text-xl">
-        Can not find Backpack
+        Can not find Hammerspace
       </h5>
     );
   }
 
-  if (store.backpack && store.backpack.backpackItems.length < 1) {
+  if (store.space && store.space.items.length < 1) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <EmptyCard onClick={onCreate}></EmptyCard>
@@ -73,7 +73,7 @@ const BackpackGrid: FC = () => {
         </Button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        {store.backpack?.backpackItems.map((item) => (
+        {store.space?.items.map((item) => (
           <div
             key={item.content}
             className="w-full bg-white border shadow-md p-6 transition-all sm:text-sm hover:-translate-y-0.5 hover:shadow-large focus:-translate-y-0.5 hover:cursor-pointer focus:shadow-large focus:outline-none rounded-md"
@@ -110,7 +110,7 @@ const BackpackGrid: FC = () => {
   );
 };
 
-export default BackpackGrid;
+export default SpaceGrid;
 
 interface EmptyCardProps {
   onClick: () => void;
@@ -132,11 +132,9 @@ const EmptyCard: FC<EmptyCardProps> = (props: EmptyCardProps) => {
           d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z"
         />
       </svg>
-      <h5 className="mt-5 mb-3 text-base font-semibold text-gray-600 md:text-xl">
-        No Backpack items
-      </h5>
+      <h5 className="mt-5 mb-3 text-base font-semibold text-gray-600 md:text-xl">No items</h5>
       <span className="text-base text-gray-400 font-semibold break-words mb-5">
-        Get started by creating your first Backpack item.
+        Get started by creating your first item.
       </span>
       <Button onClick={props.onClick} className="px-3">
         <svg
@@ -148,7 +146,7 @@ const EmptyCard: FC<EmptyCardProps> = (props: EmptyCardProps) => {
           strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
         </svg>
-        Add Backpack item
+        Add item
       </Button>
     </div>
   );

@@ -1,23 +1,23 @@
 import { useStore } from '../store';
 import { useApi } from './api-factory';
 
-export const useBackpackActions = (
+export const useHammerspaceActions = (
   errorHandler?: (message: string) => void,
   unauthorizedHandler?: (message: string) => void
 ) => {
   const [store, setStore] = useStore();
   const { api } = useApi(store.accessToken, errorHandler, unauthorizedHandler);
 
-  const getBackpack = async () => {
+  const getSpace = async () => {
     try {
       setStore((old) => ({
         ...old,
         api: { ...old.api, reading: true }
       }));
-      const backpack = await api.get('backpack/owner');
+      const space = await api.get('space/owner');
       setStore((old) => ({
         ...old,
-        backpack: backpack,
+        space: space,
         api: { ...old.api, reading: false }
       }));
     } catch (e) {
@@ -28,13 +28,13 @@ export const useBackpackActions = (
     }
   };
 
-  const deleteBackpackItem = async (id: string) => {
+  const deleteItem = async (id: string) => {
     try {
       setStore((old) => ({
         ...old,
         api: { ...old.api, writing: true }
       }));
-      await api.remove('backpack/item/' + id);
+      await api.remove('item/' + id);
       setStore((old) => ({
         ...old,
         api: { ...old.api, writing: false }
@@ -47,5 +47,5 @@ export const useBackpackActions = (
     }
   };
 
-  return { getBackpack, deleteBackpackItem };
+  return { getSpace, deleteItem };
 };
