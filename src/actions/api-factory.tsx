@@ -20,7 +20,7 @@ export const useApi = (
 
   return {
     api: new Api(
-      process.env.REACT_APP_BACKPACK_BACKEND || 'http://localhost:3000',
+      process.env.REACT_APP_BACKEND || 'http://localhost:3000',
       errorHandler || errorNotification,
       unauthorizedHandler || noAuthRedirection,
       accessToken

@@ -36,7 +36,7 @@ const ResultStage: FC<ResultStageProps> = (props: ResultStageProps) => {
       .split('.')[0];
   };
 
-  const uploadToBackpack = async () => {
+  const uploadToHammerspace = async () => {
     const replacedUrl = item.data.replace(
       'https://gateway.pinata.cloud/ipfs/',
       process.env.REACT_APP_IPFS_GATEWAY || 'https://nftstorage.link/ipfs/'
@@ -69,7 +69,7 @@ const ResultStage: FC<ResultStageProps> = (props: ResultStageProps) => {
   };
 
   useEffect(() => {
-    uploadToBackpack().catch((error) => {
+    uploadToHammerspace().catch((error) => {
       setError(error);
     });
   }, []);
@@ -127,7 +127,7 @@ const ResultStage: FC<ResultStageProps> = (props: ResultStageProps) => {
                 />
               </svg>
               <span className="mt-5 mb-3 text-base font-semibold text-gray-900 md:text-l">
-                Creating your Backpack item from avatar...
+                Creating your item from avatar...
               </span>
             </>
           )}

@@ -72,7 +72,7 @@ const TechnologyProviderModal: FC = () => {
             <span className="sr-only">Close modal</span>
           </button>
           <div className="py-4 px-6 rounded-t border-b">
-            <h3 className="text-base font-semibold text-gray-900 lg:text-xl">Add Backpack Item</h3>
+            <h3 className="text-base font-semibold text-gray-900 lg:text-xl">Add Item</h3>
           </div>
           <div className="p-6">
             <p className="text-sm font-normal text-gray-500">

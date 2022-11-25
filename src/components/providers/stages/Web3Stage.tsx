@@ -32,7 +32,7 @@ const Web3Stage: FC<Web3StageProps> = (props: Web3StageProps) => {
     window.location.replace('https://metamask.io/download');
   };
 
-  const handleBackpackAddress = async () => {
+  const handleHammerspaceAddress = async () => {
     const address = process.env.REACT_APP_CA_ADDRESS || store.userAddress;
     props.resultCallback([address]);
   };
@@ -56,7 +56,7 @@ const Web3Stage: FC<Web3StageProps> = (props: Web3StageProps) => {
         </li>
         <li>
           <button
-            onClick={handleBackpackAddress}
+            onClick={handleHammerspaceAddress}
             className="flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 hover:cursor-pointer group hover:shadow w-full justify-start">
             <svg
               xmlns="http://www.w3.org/2000/svg"

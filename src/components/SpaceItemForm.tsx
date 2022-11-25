@@ -83,8 +83,8 @@ const SpaceItemForm: FC = () => {
           <label className="block text-sm font-medium text-gray-700">HAMMERSPACE address</label>
           <input
             type="text"
-            name="backpackAddress"
-            id="backpackAddress"
+            name="hammerspaceAddress"
+            id="hammerspaceAddress"
             disabled
             className="mt-1 focus:ring-black focus:border-black block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
             value={store.space?.id}></input>
@@ -135,9 +135,6 @@ const SpaceItemForm: FC = () => {
         <div className="col-span-6 sm:col-span-6">
           <label className="block text-sm font-medium text-gray-700">Metadata</label>
           <p className="bg-gray">{JSON.stringify(item?.metadata)}</p>
-          <p className="mt-2 text-sm text-red-500">
-            {errors.source?.type === 'required' && errorMessages.required}
-          </p>
         </div>
         <Button>Save</Button>
         <Button
